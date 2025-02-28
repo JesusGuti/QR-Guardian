@@ -21,10 +21,7 @@ export function MenuButton ({
 }: Props) {
   return (
     <Link href={route} asChild>
-      <Pressable style={({ pressed }) => ({
-        ...styles.button,
-        opacity: pressed ? 0.75 : 1,
-      })}>
+      <Pressable style={styles.button}>
         <Image source={icon} style={{ width: 36, height: 36, resizeMode: 'center' }} />
         <Text style={styles.buttonText}>{text}</Text>
       </Pressable>
@@ -38,7 +35,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginVertical: 10,
-    color: '#fff',
     backgroundColor: '#2196F3',
     display: 'flex',
     flexDirection: 'row',

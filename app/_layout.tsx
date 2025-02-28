@@ -5,6 +5,7 @@ export default function Layout () {
     return (
         <View style={style.container}>
             <Slot />
+            <StatusBar barStyle={"dark-content"} />
         </View>
     )
 }
