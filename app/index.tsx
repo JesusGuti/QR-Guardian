@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { ShieldIcon } from '@/assets/svg/ShieldIcon'; 
 import { MenuButton } from '@/components/MenuButton';
 
@@ -7,7 +7,7 @@ const imageIcon = require('@/assets/images/library-photo.png')
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <>
       <ShieldIcon />
       <Text style={styles.title}>QR GUARDIAN</Text>
       <MenuButton 
@@ -20,18 +20,11 @@ export default function HomeScreen() {
         text='Seleccionar c&oacute;digo QR'
         route='./'
       />
-    </View>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000'
-  },
-  
+const styles = StyleSheet.create({  
   title: {
     color: '#fff',
     fontSize: 35,
