@@ -2,7 +2,7 @@ import {
     View, 
     StyleSheet,
     Text,
-    Button
+    Button,
 } from "react-native"
 import { 
     useCameraPermissions, 
@@ -10,13 +10,18 @@ import {
     CameraType, 
 } from "expo-camera"
 import { useState } from "react";
+import Overlay from "@/components/ui/Overlay";
+import CameraBorder from "@/components/ui/CameraBorder";
+import BackButton from "@/components/BackButton";
+import ScanAlert from "@/components/ui/ScanAlert";
+import ScanLine from "@/components/ui/ScanLine";
 
 export default function Camera () {
     // Define the back camera
     const [facing, setFacing] = useState<CameraType>('back');
     // Hook to obtain permission
     const [permission, requestPermission] = useCameraPermissions();
-
+    
     if (!permission) {
         // Camera permissions are still loading.
         return <View />;
@@ -26,80 +31,42 @@ export default function Camera () {
         // Camera permissions are not granted yet.
         return (
           <View style={styles.container}>
+            <BackButton route='../' />
             <Text style={styles.message}>Dar permiso a la ca&cute;mara</Text>
-            <Button onPress={requestPermission} title="grant permission" />
+            <Button onPress={requestPermission} title="Dar permiso a la c&aacute;mara" />
           </View>
         );
     }
     
-
     return (
         <View style={styles.container}>
-            <View style={styles.overlay}>
-                <View style={styles.maskTop}></View>
-                <View style={styles.maskMiddle}>
-                    <View style={styles.maskSide}></View>
-                    <View style={styles.hole}></View>
-                    <View style={styles.maskSide}></View>
-                </View>
-                <View style={styles.maskBottom}></View>
-                <View></View>
-            </View>
+            <BackButton route='../' />
+            <Overlay />
+            <CameraBorder />
             <CameraView 
-                    style={styles.camera} 
-                    facing={facing}> 
+                style={styles.camera} 
+                facing={facing}> 
             </CameraView>
+            <ScanAlert />
+            <ScanLine />
         </View>
     );
 }
     
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
         justifyContent: 'center',
+        alignContent: 'center',
         position: 'relative'
     },
 
     message: {
         textAlign: 'center',
         paddingBottom: 10,  
+        color: '#fff'
     },
-
-    overlay: {
-        position: 'absolute',
-        backgroundColor: 'transparent',
-        width: '100%',
-        height: '100%',
-        zIndex: 1,
-    },
-
-    maskTop: {
-        width: '100%',
-        height: '35%',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)'
-    },
-
-    maskMiddle: {
-        flexDirection: 'row',
-        width: '100%',
-        height: '30%', 
-      },
-    
-      maskSide: {
-        width: '20%', 
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-      },
-    
-      hole: {
-        flex: 1, 
-      },
-    
-      maskBottom: {
-        width: '100%',
-        height: '35%', // Parte inferior oscura
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-      },
 
     camera: {
         flex: 1,
