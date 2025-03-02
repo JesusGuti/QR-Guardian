@@ -45,7 +45,7 @@ export default function ScanLine () {
                 }
             ]}
         />
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
         position: 'absolute',
         zIndex: 2
     }
-})
+});

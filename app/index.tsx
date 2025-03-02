@@ -1,9 +1,8 @@
 import { Text, StyleSheet } from 'react-native';
 import { ShieldIcon } from '@/assets/svg/ShieldIcon'; 
 import { MenuButton } from '@/components/MenuButton';
-
-const qrCodeIcon = require('@/assets/images/qrcode.png');
-const imageIcon = require('@/assets/images/library-photo.png')
+import qrCodeIcon from '@/assets/images/qrcode.png';
+import imageIcon from '@/assets/images/library-photo.png';
 
 export default function HomeScreen() {
   return (

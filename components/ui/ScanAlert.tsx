@@ -2,7 +2,7 @@ import {
     Image,
     Text,
     StyleSheet 
-} from "react-native"
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function ScanAlert () {
@@ -17,7 +17,7 @@ export default function ScanAlert () {
             <Image source={require('@/assets/images/scan.png')} style={{ width: 48, height: 48}} />
             <Text style={styles.scanText}>Escaneando c&oacute;digo QR...</Text>
         </LinearGradient>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

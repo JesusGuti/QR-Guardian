@@ -2,51 +2,43 @@ import {
     View, 
     StyleSheet,
     Text,
-    Button,
 } from "react-native"
-import { 
-    useCameraPermissions, 
-    CameraView,
-    CameraType, 
-} from "expo-camera"
-import { useState } from "react";
+import { CameraView } from "expo-camera"
+import { useCameraPermission } from "@/hooks/useCameraPermission";
+import { useBarcodeScanner } from "@/hooks/useBarcodeScanner";
 import Overlay from "@/components/ui/Overlay";
 import CameraBorder from "@/components/ui/CameraBorder";
 import BackButton from "@/components/BackButton";
 import ScanAlert from "@/components/ui/ScanAlert";
 import ScanLine from "@/components/ui/ScanLine";
+import PermissionView from "@/components/ui/PermissionView";
 
 export default function Camera () {
-    // Define the back camera
-    const [facing, setFacing] = useState<CameraType>('back');
-    // Hook to obtain permission
-    const [permission, requestPermission] = useCameraPermissions();
-    
+    const { facing, permission, requestCameraPermission } = useCameraPermission()
+    const { obtainedURL, handleBarcodeScanner } = useBarcodeScanner()
+
     if (!permission) {
-        // Camera permissions are still loading.
         return <View />;
     }
     
     if (!permission.granted) {
         // Camera permissions are not granted yet.
-        return (
-          <View style={styles.container}>
-            <BackButton route='../' />
-            <Text style={styles.message}>Dar permiso a la ca&cute;mara</Text>
-            <Button onPress={requestPermission} title="Dar permiso a la c&aacute;mara" />
-          </View>
-        );
+        return <PermissionView requestPermission={requestCameraPermission} />;
     }
     
     return (
         <View style={styles.container}>
             <BackButton route='../' />
+            <Text style={styles.url}>{obtainedURL}</Text>
             <Overlay />
             <CameraBorder />
             <CameraView 
+                barcodeScannerSettings={{
+                    barcodeTypes: ["qr"]
+                }} 
+                onBarcodeScanned={ handleBarcodeScanner }
                 style={styles.camera} 
-                facing={facing}> 
-            </CameraView>
+                facing={facing} /> 
             <ScanAlert />
             <ScanLine />
         </View>
@@ -59,16 +51,20 @@ export const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignContent: 'center',
-        position: 'relative'
-    },
-
-    message: {
-        textAlign: 'center',
-        paddingBottom: 10,  
-        color: '#fff'
+        position: 'relative',
+        textAlign: 'center'
     },
 
     camera: {
         flex: 1,
     },
+
+    url: {
+        position: 'absolute',
+        top: '15%',
+        color: '#fff',
+        textDecorationLine: 'underline',
+        fontSize: 20,
+        zIndex: 2
+    }
 });
