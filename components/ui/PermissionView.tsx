@@ -5,7 +5,9 @@ import {
     Pressable
 } from "react-native";
 import { PropsWithChildren } from "react";
+import { ShieldIcon } from "@/assets/svg/ShieldIcon";
 import BackButton from "@/components/BackButton";
+
 
 type Props = PropsWithChildren<{
     requestPermission: () => void
@@ -15,6 +17,8 @@ export default function PermissionView ({ requestPermission }: Props) {
     return (
         <View style={styles.container}>
             <BackButton route='../' />
+            <ShieldIcon />
+            <Text style={styles.title}>QR GUARDIAN</Text>
             <Text style={styles.message}>Necesita permisos de c&aacute;mara para analizar un c&oacute;digo QR. Por favor presione el siguiente bot&oacute;n</Text>
             <Pressable style={styles.button} onPress={requestPermission}>
                 <Text style={styles.buttonText}>Dar permiso a la c&aacute;mara</Text>
@@ -29,9 +33,19 @@ const styles = StyleSheet.create({
         height: '100%',
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
         position: 'relative',
         textAlign: 'center'
     },
+
+    title: {
+        color: '#fff',
+        fontSize: 35,
+        fontWeight: '600',
+        marginBottom: 70,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+      },
 
     message: {
         marginLeft: 'auto',

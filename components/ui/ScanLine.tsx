@@ -8,8 +8,9 @@ import {
     useEffect
 } from "react"
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 const SCANNING_AREA_SIZE = width * 0.7;
+const SCANNING_HEIGHT_START = height * 0.33
 
 export default function ScanLine () {
     const scanLineAnim = useRef(new Animated.Value(0)).current;
@@ -39,7 +40,7 @@ export default function ScanLine () {
                     transform: [{
                         translateY: scanLineAnim.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [0, SCANNING_AREA_SIZE],
+                            outputRange: [0, SCANNING_HEIGHT_START],
                             }),
                     }]
                 }
@@ -51,9 +52,9 @@ export default function ScanLine () {
 const styles = StyleSheet.create({
     scanLine: {
         height: 3,
-        width: SCANNING_AREA_SIZE,
-        top: SCANNING_AREA_SIZE - 40,
-        left: '15%',
+        width: SCANNING_AREA_SIZE - 15,
+        top: SCANNING_HEIGHT_START,
+        left: '16.25%',
         backgroundColor: '#2196F3',
         position: 'absolute',
         zIndex: 2
