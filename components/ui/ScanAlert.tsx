@@ -4,18 +4,51 @@ import {
     StyleSheet 
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { PropsWithChildren } from "react";
+import { getImageByRoute } from "@/services/scanImage";
+import { 
+    redGradient,
+    blueGradient
+ } from "@/constants/gradientSchema";
 
-export default function ScanAlert () {
+type Props = PropsWithChildren<{
+    scanStatus: string
+    iconRoute: string
+    alertMessage: string
+}>
+
+export default function ScanAlert ({
+    scanStatus,
+    iconRoute,
+    alertMessage
+}: Props) {
+    const imageSource = getImageByRoute(iconRoute)
+    
+    if (scanStatus === "error") {
+        return (
+            <LinearGradient 
+                colors={redGradient.colors}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                locations={redGradient.locations}
+                style={styles.scanState}
+        >
+            <Image source={imageSource} style={{ width: 36, height: 36 }} />
+            <Text style={styles.scanText}>{alertMessage}</Text>
+        </LinearGradient>
+        );
+    }
+
     return (
         <LinearGradient 
-            colors={['rgba(19, 87, 141, 0.31)', 'rgba(33, 150, 243, 0.40)']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            locations={[0.5, 1.0]}
-            style={styles.scanState}
+                colors={blueGradient.colors}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                locations={blueGradient.locations}
+                style={styles.scanState}
         >
-            <Image source={require('@/assets/images/scan.png')} style={{ width: 48, height: 48}} />
-            <Text style={styles.scanText}>Escaneando c&oacute;digo QR...</Text>
+            <Image source={imageSource} style={{ width: 36, height: 36 }} />
+            <Text style={styles.scanText}>{alertMessage}</Text>
         </LinearGradient>
     );
 }
@@ -23,7 +56,7 @@ export default function ScanAlert () {
 const styles = StyleSheet.create({
     scanState: {
         position: 'absolute',
-        width: '70%',
+        width: 290,
         height: 60,
         padding: 5,
         bottom: 100,
@@ -39,6 +72,6 @@ const styles = StyleSheet.create({
     scanText: {
         color: '#fff',
         fontWeight: 600,
-        marginLeft: -30
+        marginLeft: -15
     }
 });

@@ -14,8 +14,16 @@ import ScanLine from "@/components/ui/ScanLine";
 import PermissionView from "@/components/ui/PermissionView";
 
 export default function Camera () {
-    const { facing, permission, requestCameraPermission } = useCameraPermission()
-    const { obtainedURL, handleBarcodeScanner } = useBarcodeScanner()
+    const { 
+        facing, 
+        permission, 
+        requestCameraPermission 
+    } = useCameraPermission()
+    const { 
+        obtainedURL, 
+        scanData,
+        handleBarcodeScanner 
+    } = useBarcodeScanner()
 
     if (!permission) {
         return <View />;
@@ -26,6 +34,8 @@ export default function Camera () {
         return <PermissionView requestPermission={requestCameraPermission} />;
     }
     
+    console.log(scanData)
+
     return (
         <View style={styles.container}>
             <BackButton route='../' />
@@ -39,7 +49,11 @@ export default function Camera () {
                 onBarcodeScanned={ handleBarcodeScanner }
                 style={styles.camera} 
                 facing={facing} /> 
-            <ScanAlert />
+            <ScanAlert 
+                scanStatus={scanData.scanStatus}
+                iconRoute={scanData.icon}
+                alertMessage={scanData.message}
+            />
             <ScanLine />
         </View>
     );
@@ -62,6 +76,8 @@ export const styles = StyleSheet.create({
     url: {
         position: 'absolute',
         top: '15%',
+        left: '15%',
+        width: 400,
         color: '#fff',
         textDecorationLine: 'underline',
         fontSize: 20,
