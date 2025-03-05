@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { PropsWithChildren } from "react";
-import { getImageByRoute } from "@/services/scanImage";
+import { getImageByRoute } from "@/services/getImageByRoute";
 import { 
     redGradient,
     blueGradient

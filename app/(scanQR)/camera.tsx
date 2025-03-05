@@ -34,8 +34,6 @@ export default function Camera () {
         return <PermissionView requestPermission={requestCameraPermission} />;
     }
     
-    console.log(scanData)
-
     return (
         <View style={styles.container}>
             <BackButton route='../' />
