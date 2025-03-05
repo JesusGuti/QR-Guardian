@@ -5,8 +5,8 @@ import {
     Text
 } from 'react-native';
 import { useSearchParamsFromImage } from "@/hooks/useSearchParamsFromImage";
-import BackButton from "@/components/BackButton";
-import ScanAlert from "@/components/ui/ScanAlert";
+import BackButton from "@/components/ui/BackButton";
+import ScanAlert from "@/components/ScanComponents/ScanAlert";
 
 export default function ScanFromImage () {
     const { 

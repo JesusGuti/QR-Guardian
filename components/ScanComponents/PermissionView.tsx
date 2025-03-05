@@ -6,7 +6,7 @@ import {
 } from "react-native";
 import { PropsWithChildren } from "react";
 import { ShieldIcon } from "@/assets/svg/ShieldIcon";
-import BackButton from "@/components/BackButton";
+import BackButton from "@/components/ui/BackButton";
 
 
 type Props = PropsWithChildren<{
