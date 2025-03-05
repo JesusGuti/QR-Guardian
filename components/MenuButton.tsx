@@ -9,19 +9,21 @@ import {
 } from "react-native"
 
 type Props = PropsWithChildren<{
-    icon: ImageSourcePropType,
-    text: string,
+    icon: ImageSourcePropType
+    text: string
     route: RelativePathString
+    buttonFunction: null | (() => void) 
 }>;
 
 export function MenuButton ({ 
     icon, 
     text, 
-    route 
+    route,
+    buttonFunction
 }: Props) {
   return (
     <Link href={route} asChild>
-      <Pressable style={styles.button}>
+      <Pressable onPress={buttonFunction} style={styles.button}>
         <Image source={icon} style={{ width: 36, height: 36, resizeMode: 'center' }} />
         <Text style={styles.buttonText}>{text}</Text>
       </Pressable>
