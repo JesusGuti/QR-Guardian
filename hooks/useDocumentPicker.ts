@@ -1,14 +1,27 @@
-import { getDocumentAsync } from 'expo-document-picker';
+import { getDocumentAsync } from "expo-document-picker";
 import { 
     BarcodeScanningResult, 
     scanFromURLAsync 
-} from 'expo-camera'
+} from "expo-camera";
+import {
+    useState,
+    useEffect
+} from "react";
 import { useRouter } from "expo-router";
 
 const MIN_NUMBER_OF_FILES = 0;
 
 export function useDocumentPicker () {
     const router = useRouter();
+    const [showMessageError, setShowMessageError] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (showMessageError) {
+            setTimeout(() => {
+                setShowMessageError(false);
+            }, 5000);
+        }
+    }, [showMessageError]);
 
     const pickImageAndScan = async (): Promise<void> => {
         try {
@@ -23,6 +36,7 @@ export function useDocumentPicker () {
                 const scannedData = await scanQR(resultUri);
                 
                 if (typeof scannedData === 'string') {
+                    setShowMessageError(true);
                     return;
                 }
 
@@ -57,5 +71,5 @@ export function useDocumentPicker () {
         }
     }
 
-    return { pickImageAndScan };
+    return { pickImageAndScan, showMessageError };
 }
