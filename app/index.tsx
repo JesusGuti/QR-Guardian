@@ -1,8 +1,8 @@
 import { Text, StyleSheet } from 'react-native';
 import { ShieldIcon } from '@/assets/svg/ShieldIcon'; 
-import { MenuButton } from '@/components/MenuButton';
+import { MenuButton } from '@/components/ui/MenuButton';
 import { useDocumentPicker } from '@/hooks/useDocumentPicker';
-import ErrorHeader from '@/components/ErrorHeader';
+import ErrorHeader from '@/components/ui/ErrorHeader';
 
 import qrCodeIcon from '@/assets/images/qrcode.png';
 import imageIcon from '@/assets/images/library-photo.png';

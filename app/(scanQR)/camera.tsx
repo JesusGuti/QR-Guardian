@@ -6,12 +6,12 @@ import {
 import { CameraView } from "expo-camera"
 import { useCameraPermission } from "@/hooks/useCameraPermission";
 import { useBarcodeScanner } from "@/hooks/useBarcodeScanner";
-import Overlay from "@/components/ui/Overlay";
-import CameraBorder from "@/components/ui/CameraBorder";
-import BackButton from "@/components/BackButton";
-import ScanAlert from "@/components/ui/ScanAlert";
-import ScanLine from "@/components/ui/ScanLine";
-import PermissionView from "@/components/ui/PermissionView";
+import Overlay from "@/components/ScanComponents/Overlay";
+import CameraBorder from "@/components/ScanComponents/CameraBorder";
+import BackButton from "@/components/ui/BackButton";
+import ScanAlert from "@/components/ScanComponents/ScanAlert";
+import ScanLine from "@/components/ScanComponents/ScanLine";
+import PermissionView from "@/components/ScanComponents/PermissionView";
 
 export default function Camera () {
     const { 
@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         top: '15%',
         left: '15%',
-        width: 400,
+        width: 300,
         color: '#fff',
         textDecorationLine: 'underline',
         fontSize: 20,
