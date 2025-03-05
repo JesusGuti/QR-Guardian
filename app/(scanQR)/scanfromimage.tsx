@@ -4,15 +4,27 @@ import {
     StyleSheet,
     Text
 } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useSearchParamsFromImage } from "@/hooks/useSearchParamsFromImage";
+import BackButton from "@/components/BackButton";
+import ScanAlert from "@/components/ui/ScanAlert";
 
 export default function ScanFromImage () {
-    const { uri, qrdata } = useLocalSearchParams()
+    const { 
+        uri,
+        obtainedUrl,
+        scanData
+    } = useSearchParamsFromImage()
 
     return (
-        <View>
+        <View style={styles.container}>
+            <BackButton route='../' />
+            <Text style={styles.url}>{obtainedUrl}</Text>
             <Image source={{ uri: uri }} style={styles.image} />
-            <Text style={styles.text}>HOLA CTM</Text>
+            <ScanAlert 
+                scanStatus={scanData.scanStatus}
+                iconRoute={scanData.icon}
+                alertMessage={scanData.message}
+            />
         </View>
     );
 }
@@ -21,16 +33,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%',
+    },
+
+    url: {
+        color: '#fff',
+        fontSize: 20,
+        textDecorationLine: 'underline',
+        marginBottom: 50
     },
 
     image: {
-        width: 300,
-        height: 300,
-        marginBottom: 20
+        width: 290,
+        height: 290,
+        marginBottom: 40
     },
-
-    text: {
-        color: '#fff'
-    }
 })

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { getDocumentAsync } from 'expo-document-picker';
 import { 
     BarcodeScanningResult, 
@@ -8,10 +7,8 @@ import { useRouter } from "expo-router";
 
 const MIN_NUMBER_OF_FILES = 0;
 
-export function useQRScanner () {
+export function useDocumentPicker () {
     const router = useRouter();
-    const [qrData, setQRData] = useState<null | BarcodeScanningResult | string>(null);
-    const [imageUri, setImageUri] = useState<null | string>(null);
 
     const pickImageAndScan = async (): Promise<void> => {
         try {
@@ -28,9 +25,6 @@ export function useQRScanner () {
                 if (typeof scannedData === 'string') {
                     return;
                 }
-
-                setImageUri(resultUri);
-                setQRData(scannedData);
 
                 router.push({
                     pathname: '/(scanQR)/scanfromimage',
@@ -63,9 +57,5 @@ export function useQRScanner () {
         }
     }
 
-    return { 
-        pickImageAndScan,
-        qrData,
-        imageUri
-     };
+    return { pickImageAndScan };
 }

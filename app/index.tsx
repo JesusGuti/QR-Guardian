@@ -1,12 +1,12 @@
 import { Text, StyleSheet } from 'react-native';
 import { ShieldIcon } from '@/assets/svg/ShieldIcon'; 
 import { MenuButton } from '@/components/MenuButton';
-import { useQRScanner } from '@/hooks/useQRScanner';
+import { useDocumentPicker } from '@/hooks/useDocumentPicker';
 import qrCodeIcon from '@/assets/images/qrcode.png';
 import imageIcon from '@/assets/images/library-photo.png';
 
 export default function HomeScreen() {
-  const { pickImageAndScan } = useQRScanner()
+  const { pickImageAndScan } = useDocumentPicker()
 
   return (
     <>
