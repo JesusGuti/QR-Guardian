@@ -4,7 +4,7 @@ import {
 } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
-import { checkStartPattern } from "@/services/link";
+import { checkStartPattern } from "@/services/checkUrl";
 
 export function useSearchParamsFromImage () {
     const { uri, qrdata } = useLocalSearchParams()

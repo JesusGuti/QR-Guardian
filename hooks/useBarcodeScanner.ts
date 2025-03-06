@@ -5,7 +5,7 @@ import {
 } from "react";
 import { BarcodeScanningResult } from "expo-camera";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
-import { checkStartPattern } from "@/services/link";
+import { checkStartPattern } from "@/services/checkUrl";
 import throttle from "just-throttle";
 
 export function useBarcodeScanner () {
