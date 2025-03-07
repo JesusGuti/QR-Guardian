@@ -14,6 +14,11 @@ export const scanAlertSchema = {
         icon: '@/assets/images/qrcode-blue.png',
         message: 'Código QR seleccionado'
     },
+    shorten: {
+        scanStatus: 'scanned',
+        icon: '@/assets/images/viewport.png',
+        message: 'Código QR escaneado'
+    },
     error: {
         scanStatus: 'error',
         icon: '@/assets/images/unlink.png',

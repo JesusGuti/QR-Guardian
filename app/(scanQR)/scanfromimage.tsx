@@ -11,15 +11,15 @@ import ScanAlert from "@/components/ScanComponents/ScanAlert";
 export default function ScanFromImage () {
     const { 
         uri,
-        obtainedUrl,
+        obtainedURL,
         scanData
     } = useSearchParamsFromImage()
 
     return (
         <View style={styles.container}>
             <BackButton route='../' />
-            <Text style={styles.url}>{obtainedUrl}</Text>
-            <Image source={{ uri: uri }} style={styles.image} />
+            <Text style={styles.url}>{obtainedURL}</Text>
+            <Image source={{ uri: uri.toString() }} style={styles.image} />
             <ScanAlert 
                 scanStatus={scanData.scanStatus}
                 iconRoute={scanData.icon}

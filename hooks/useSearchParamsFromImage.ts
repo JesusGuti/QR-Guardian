@@ -4,29 +4,46 @@ import {
 } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
-import { checkStartPattern } from "@/services/checkUrl";
+import { 
+    checkStartPattern,
+    checkIfThereAreHops 
+} from "@/services/checkUrl";
 
 export function useSearchParamsFromImage () {
-    const { uri, qrdata } = useLocalSearchParams()
-    const [obtainedUrl, setObtainedUrl] = useState("");
+    const { uri, qrdata } = useLocalSearchParams();
+    const [obtainedURL, setObtainedURL] = useState("");
     const [scanData, setScanData] = useState(scanAlertSchema.info)
+    const [isUrlShorten, setIsUrlShorten] = useState(false);
 
     useEffect(() => {
-        const scannedQR = JSON.parse(qrdata)
-        const { data } = scannedQR
+        const scannedQR = JSON.parse(qrdata.toString());
+        const { data } = scannedQR;
 
         if (checkStartPattern(data)) {
-            setObtainedUrl(data)
-            setScanData(scanAlertSchema.selected)
+            setObtainedURL(data);
+            setScanData(scanAlertSchema.selected);
+            
+            setTimeout(async () => {
+                const urlAfterCheckHops = await checkIfThereAreHops(data);
+                if (urlAfterCheckHops && urlAfterCheckHops !== data) {
+                    setObtainedURL(urlAfterCheckHops);
+                    setIsUrlShorten(true);
+                    setScanData({
+                        ...scanAlertSchema.shorten
+                    });
+                }
+            }, 2000);
+
             return;
         }
 
-        setScanData(scanAlertSchema.error)        
-    }, [qrdata])   
+        setScanData(scanAlertSchema.error);       
+    }, [qrdata]);   
 
     return {
         uri,
-        obtainedUrl,
-        scanData
-    }
+        obtainedURL,
+        scanData,
+        isUrlShorten
+    };
 }
