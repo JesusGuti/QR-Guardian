@@ -6,7 +6,8 @@ import {
 import { BarcodeScanningResult } from "expo-camera";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
 import { 
-    checkIfUrlIsShortened,
+    areOriginalUrlAndHoppedSimilar,
+    checkIfThereAreHops,
     checkStartPattern, 
 } from "@/services/checkUrl";
 import throttle from "just-throttle";
@@ -19,16 +20,16 @@ export function useBarcodeScanner () {
 
     // No matter hoy many times the function is called, only invoke once withing the given interval
     const throttledSetObtainedURL = useRef(
-        throttle(async (data: string) => {
+        throttle((data: string) => {
             setObtainedURL(data);
             setScanData({
                 ...scanAlertSchema.scanned
             })
 
             setTimeout(async () => {
-                const urlAfterCheckHops = await checkIfUrlIsShortened(data);
+                const urlAfterCheckHops = await checkIfThereAreHops(data);
 
-                if (urlAfterCheckHops && urlAfterCheckHops !== data) {
+                if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
                     setObtainedURL(urlAfterCheckHops);
                     setIsUrlShorten(true);
                     setScanData({

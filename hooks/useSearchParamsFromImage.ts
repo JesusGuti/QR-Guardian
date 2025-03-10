@@ -5,8 +5,9 @@ import {
 import { useLocalSearchParams } from "expo-router";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
 import { 
+    areOriginalUrlAndHoppedSimilar,
     checkStartPattern,
-    checkIfThereAreHops 
+    checkIfThereAreHops
 } from "@/services/checkUrl";
 
 export function useSearchParamsFromImage () {
@@ -22,10 +23,11 @@ export function useSearchParamsFromImage () {
         if (checkStartPattern(data)) {
             setObtainedURL(data);
             setScanData(scanAlertSchema.selected);
-            
+
             setTimeout(async () => {
                 const urlAfterCheckHops = await checkIfThereAreHops(data);
-                if (urlAfterCheckHops && urlAfterCheckHops !== data) {
+                
+                if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
                     setObtainedURL(urlAfterCheckHops);
                     setIsUrlShorten(true);
                     setScanData({
