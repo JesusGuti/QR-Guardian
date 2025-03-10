@@ -13,7 +13,7 @@ import {
 import throttle from "just-throttle";
 
 export function useBarcodeScanner () {
-    const throttleDelay = 5000;
+    const throttleDelay = 4000;
     const [obtainedURL, setObtainedURL] = useState("");
     const [scanData, setScanData] = useState(scanAlertSchema.info)
     const [isUrlShorten, setIsUrlShorten] = useState(false);

@@ -22,7 +22,8 @@ export default function Camera () {
     const { 
         obtainedURL, 
         scanData,
-        handleBarcodeScanner 
+        handleBarcodeScanner,
+        isUrlShorten
     } = useBarcodeScanner()
 
     if (!permission) {
@@ -37,6 +38,7 @@ export default function Camera () {
     return (
         <View style={styles.container}>
             <BackButton route='../' />
+            {isUrlShorten && <Text style={styles.shorten}>URL ACORTADA</Text>}
             <Text style={styles.url}>{obtainedURL}</Text>
             <Overlay />
             <CameraBorder />
@@ -69,6 +71,16 @@ export const styles = StyleSheet.create({
 
     camera: {
         flex: 1,
+    },
+
+    shorten: {
+        position: 'absolute',
+        top: '8%',
+        left: 100,
+        color: 'rgba(33, 150, 243, 0.7)',
+        fontSize: 30,
+        fontWeight: 600,
+        zIndex: 2
     },
 
     url: {
