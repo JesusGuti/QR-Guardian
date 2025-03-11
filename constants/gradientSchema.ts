@@ -8,6 +8,11 @@ export const redGradient = {
     locations: [0.71, 0.94] as const
 };
 
+export const dangerGradient = {
+    colors: ['rgba(255, 138, 128, 1)', 'rgba(248, 195, 195, 0.7)'] as const,
+    locations: [0.65, 1] as const
+};
+    
 export const safeGradient = {
     colors: ['rgba(142, 252, 95, 0.9)', 'rgba(102, 187, 106, 0.7)'] as const,
     locations: [0.7, 1] as const 
