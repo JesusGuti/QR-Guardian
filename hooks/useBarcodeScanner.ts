@@ -8,7 +8,7 @@ import { scanAlertSchema } from "@/constants/scanAlertSchema";
 import { 
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
-    checkStartPattern, 
+    checkIfIsValidURL
 } from "@/services/checkUrl";
 import throttle from "just-throttle";
 
@@ -45,7 +45,7 @@ export function useBarcodeScanner () {
          (scanningResult: BarcodeScanningResult) => {
             const { data } = scanningResult;
 
-            if (!checkStartPattern(data)) {
+            if (!checkIfIsValidURL(data)) {
                 setObtainedURL("")
                 setScanData({
                     ...scanAlertSchema.error

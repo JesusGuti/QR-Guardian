@@ -6,8 +6,8 @@ import { useLocalSearchParams } from "expo-router";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
 import { 
     areOriginalUrlAndHoppedSimilar,
-    checkStartPattern,
-    checkIfThereAreHops
+    checkIfThereAreHops,
+    checkIfIsValidURL
 } from "@/services/checkUrl";
 
 export function useSearchParamsFromImage () {
@@ -20,7 +20,7 @@ export function useSearchParamsFromImage () {
         const scannedQR = JSON.parse(qrdata.toString());
         const { data } = scannedQR;
 
-        if (checkStartPattern(data)) {
+        if (checkIfIsValidURL(data)) {
             setObtainedURL(data);
             setScanData(scanAlertSchema.selected);
 
