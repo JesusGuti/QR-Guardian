@@ -7,3 +7,8 @@ export const redGradient = {
     colors: ['rgba(255, 82, 82, 0.4)', 'rgba(255, 138, 128, 0.2)'] as const,
     locations: [0.71, 0.94] as const
 };
+
+export const safeGradient = {
+    colors: ['rgba(142, 252, 95, 0.9)', 'rgba(102, 187, 106, 0.7)'] as const,
+    locations: [0.7, 1] as const 
+};

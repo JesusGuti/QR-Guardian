@@ -8,7 +8,7 @@ export default function BackArrowIcon () {
             viewBox="0 0 24 24"  
             fill="none"  
             stroke="#ffffff"  
-            stroke-width="2"  
+            stroke-width="4"  
             stroke-linecap="round"  
             stroke-linejoin="round"  
         >

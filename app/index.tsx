@@ -27,6 +27,12 @@ export default function HomeScreen() {
         route='./'
         buttonFunction={pickImageAndScan}
       />
+      <MenuButton 
+        icon={imageIcon}
+        text='Pantalla segura'
+        route='./safescreen'
+        buttonFunction={null}
+      />
     </>
   );
 }

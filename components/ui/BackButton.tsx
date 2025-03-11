@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import BackArrowIcon from "@/assets/svg/BackArrowIcon";
 
 type Props = PropsWithChildren<{
-    route: RelativePathString
+    route: RelativePathString 
 }>;
 
 export default function BackButton ({ route }: Props) {
