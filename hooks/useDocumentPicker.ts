@@ -27,7 +27,7 @@ export function useDocumentPicker () {
         try {
             // Get a file from filesystem
             const result = await getDocumentAsync({
-                type: 'image/*'
+                type: ["image/*", "svg"]
             });
 
             if (result.assets?.length && result.assets?.length > MIN_NUMBER_OF_FILES) {

@@ -11,15 +11,17 @@ import ScanAlert from "@/components/ScanComponents/ScanAlert";
 export default function ScanFromImage () {
     const { 
         uri,
-        obtainedUrl,
-        scanData
+        obtainedURL,
+        scanData,
+        isUrlShorten
     } = useSearchParamsFromImage()
 
     return (
         <View style={styles.container}>
             <BackButton route='../' />
-            <Text style={styles.url}>{obtainedUrl}</Text>
-            <Image source={{ uri: uri }} style={styles.image} />
+            {isUrlShorten && <Text style={styles.shorten}>URL ACORTADA</Text>}
+            <Text style={styles.url}>{obtainedURL}</Text>
+            <Image source={{ uri: uri.toString() }} style={styles.image} />
             <ScanAlert 
                 scanStatus={scanData.scanStatus}
                 iconRoute={scanData.icon}
@@ -37,14 +39,25 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 
+    shorten: {
+        position: 'absolute',
+        top: '12%',
+        fontSize: 30,
+        fontWeight: 600,
+        color: 'rgba(33, 150, 243, 0.7)'
+    },
+
     url: {
         color: '#fff',
         fontSize: 20,
         textDecorationLine: 'underline',
-        marginBottom: 50
+        position: 'absolute',
+        top: '20%'
     },
 
     image: {
+        position: 'absolute',
+        top: '35%',
         width: 290,
         height: 290,
         marginBottom: 40

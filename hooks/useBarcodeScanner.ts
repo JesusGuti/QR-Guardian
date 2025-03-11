@@ -5,13 +5,18 @@ import {
 } from "react";
 import { BarcodeScanningResult } from "expo-camera";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
-import { checkStartPattern } from "@/services/link";
+import { 
+    areOriginalUrlAndHoppedSimilar,
+    checkIfThereAreHops,
+    checkIfIsValidURL
+} from "@/services/checkUrl";
 import throttle from "just-throttle";
 
 export function useBarcodeScanner () {
-    const throttleDelay = 200;
+    const throttleDelay = 4000;
     const [obtainedURL, setObtainedURL] = useState("");
     const [scanData, setScanData] = useState(scanAlertSchema.info)
+    const [isUrlShorten, setIsUrlShorten] = useState(false);
 
     // No matter hoy many times the function is called, only invoke once withing the given interval
     const throttledSetObtainedURL = useRef(
@@ -20,6 +25,19 @@ export function useBarcodeScanner () {
             setScanData({
                 ...scanAlertSchema.scanned
             })
+
+            setTimeout(async () => {
+                const urlAfterCheckHops = await checkIfThereAreHops(data);
+
+                if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
+                    setObtainedURL(urlAfterCheckHops);
+                    setIsUrlShorten(true);
+                    setScanData({
+                        ...scanAlertSchema.shorten
+                    })
+                }
+            }, 1000)
+             
         }, throttleDelay)
     ).current;
 
@@ -27,7 +45,7 @@ export function useBarcodeScanner () {
          (scanningResult: BarcodeScanningResult) => {
             const { data } = scanningResult;
 
-            if (!checkStartPattern(data)) {
+            if (!checkIfIsValidURL(data)) {
                 setObtainedURL("")
                 setScanData({
                     ...scanAlertSchema.error
@@ -42,6 +60,7 @@ export function useBarcodeScanner () {
     return { 
         obtainedURL, 
         scanData,
+        isUrlShorten,
         handleBarcodeScanner 
     };
 }

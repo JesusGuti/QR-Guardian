@@ -1,6 +1,7 @@
 import scanIcon from "@/assets/images/scan.png";
 import qrcodeBlueIcon from "@/assets/images/qrcode-blue.png";
 import unlinkIcon from "@/assets/images/unlink.png";
+import viewportIcon from "@/assets/images/viewport.png";
 
 export function getImageByRoute (iconRoute: string) {
     let imageSource;
@@ -14,6 +15,9 @@ export function getImageByRoute (iconRoute: string) {
             break;
         case "@/assets/images/unlink.png":
             imageSource = unlinkIcon;
+            break;
+        case "@/assets/images/viewport.png":
+            imageSource = viewportIcon;
             break;
         default: 
             imageSource = scanIcon;
