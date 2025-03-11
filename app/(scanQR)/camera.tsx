@@ -25,7 +25,7 @@ export default function Camera () {
         handleBarcodeScanner,
         isUrlShorten
     } = useBarcodeScanner()
-
+ 
     if (!permission) {
         return <View />;
     }
