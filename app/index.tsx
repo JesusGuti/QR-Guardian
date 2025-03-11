@@ -33,6 +33,12 @@ export default function HomeScreen() {
         route='./dangerscreen'
         buttonFunction={null}
       />
+      <MenuButton 
+        icon={imageIcon}
+        text='Pantalla segura'
+        route='./safescreen'
+        buttonFunction={null}
+      />
     </>
   );
 }
