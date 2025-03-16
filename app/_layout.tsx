@@ -1,20 +1,14 @@
 import { Slot } from "expo-router"
-import { View, StyleSheet, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
+import { NavigationProvider } from "@/contexts/NavigationProvider";
 
 export default function Layout () {
     return (
-        <View style={style.container}>
-            <Slot />
-            <StatusBar barStyle={"dark-content"} />
-        </View>
+        <>
+            <NavigationProvider>
+                <Slot />
+                <StatusBar barStyle={"dark-content"} />
+            </NavigationProvider>
+        </>
     )
 }
-
-const style = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#000'
-    }
-})

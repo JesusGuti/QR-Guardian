@@ -37,7 +37,6 @@ export function useBarcodeScanner () {
                     })
                 }
 
-                // await analyzeUrlAndRedirect(urlAfterCheckHops);
             }, 1500)
              
         }, throttleDelay)
