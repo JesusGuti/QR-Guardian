@@ -1,16 +1,16 @@
+import throttle from "just-throttle";
+import { BarcodeScanningResult } from "expo-camera";
+import { scanAlertSchema } from "@/constants/scanAlertSchema";
 import { 
     useCallback, 
     useRef, 
     useState 
 } from "react";
-import { BarcodeScanningResult } from "expo-camera";
-import { scanAlertSchema } from "@/constants/scanAlertSchema";
 import { 
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL
 } from "@/services/checkUrl";
-import throttle from "just-throttle";
 
 export function useBarcodeScanner () {
     const throttleDelay = 4000;
@@ -36,7 +36,9 @@ export function useBarcodeScanner () {
                         ...scanAlertSchema.shorten
                     })
                 }
-            }, 1000)
+
+                // await analyzeUrlAndRedirect(urlAfterCheckHops);
+            }, 1500)
              
         }, throttleDelay)
     ).current;

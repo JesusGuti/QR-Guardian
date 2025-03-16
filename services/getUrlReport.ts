@@ -71,9 +71,17 @@ export async function getUrlReportAnalysis (id: string): Promise<VirusTotalAnaly
             last_analysis_results: attributes.last_analysis_results
         }
 
-        console.log(result)
         return result;
     } catch (error) {
         throw new Error(`Error en la solicitud: ${error?.message}`);
     }
+}
+
+export function isUrlSafe (analysis: VirusTotalAnalysis): boolean {
+    const maliciousScansCount = analysis.last_analysis_stats.malicious;
+    const suspiciousScansCount = analysis.last_analysis_stats.suspicious;
+
+    if (maliciousScansCount > 0 || suspiciousScansCount > 0) return false;
+
+    return true;
 }

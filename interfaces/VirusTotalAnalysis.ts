@@ -1,6 +1,6 @@
 export interface VirusTotalAnalysis {
     last_analysis_stats: {
-        malicius: number,
+        malicious: number,
         suspicious: number;
         undetected: number;
         harmless: number;

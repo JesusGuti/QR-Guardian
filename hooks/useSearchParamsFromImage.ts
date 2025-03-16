@@ -4,22 +4,26 @@ import {
 } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { scanAlertSchema } from "@/constants/scanAlertSchema";
+import { useRouter } from "expo-router";
 import { 
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL
 } from "@/services/checkUrl";
 import {
-    scanUrl,
-    getUrlReportAnalysis
+    isUrlSafe,
+    getUrlReportAnalysis,
+    scanUrl
 } from "@/services/getUrlReport";
-
+import { VirusTotalAnalysis } from "@/interfaces/VirusTotalAnalysis";
 
 export function useSearchParamsFromImage () {
     const { uri, qrdata } = useLocalSearchParams();
     const [obtainedURL, setObtainedURL] = useState("");
     const [scanData, setScanData] = useState(scanAlertSchema.info)
     const [isUrlShorten, setIsUrlShorten] = useState(false);
+    // const [analysisResult, setAnalysisResult] = useState<VirusTotalAnalysis | null>(null);
+    const router = useRouter()
 
     useEffect(() => {
         const scannedQR = JSON.parse(qrdata.toString());
@@ -42,14 +46,29 @@ export function useSearchParamsFromImage () {
                 setScanData({
                     ...scanAlertSchema.shorten
                 });
-            }
+            }        
+            
+            const urlID = await scanUrl(urlAfterCheckHops);
+            const results = await getUrlReportAnalysis(urlID);
 
-            // Send to Virus Total API
-            const urlID = await scanUrl('metamaaskloginc.webflow.io')
-            const results = await getUrlReportAnalysis(urlID) 
-            console.log(results)
+            if (isUrlSafe(results)) {
+                router.replace({ pathname: "/(results)/safescreen", params: { url: obtainedURL } });
+            } else {
+                router.replace({ pathname: "/(results)/dangerscreen", params: { results: JSON.stringify(results)} })
+            }
+            // setAnalysisResult(results);
         }, 1500);    
     }, [qrdata]);   
+
+    // useEffect(() => {
+    //     if (analysisResult) {
+    //         if (isUrlSafe(analysisResult)) {
+    //             router.replace({ pathname: "/(results)/safescreen", params: { url: obtainedURL } });
+    //         } else {
+    //             router.replace({ pathname: "/(results)/dangerscreen", params: { results: JSON.stringify(analysisResult)} })
+    //         }
+    //     }
+    // }, [analysisResult]);
 
     return {
         uri,
