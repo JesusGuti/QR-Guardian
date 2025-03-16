@@ -32,10 +32,10 @@ export default function ScanAlert ({
                 end={{ x: 1, y: 0 }}
                 locations={redGradient.locations}
                 style={styles.scanState}
-        >
-            <Image source={imageSource} style={{ width: 36, height: 36 }} />
-            <Text style={styles.scanText}>{alertMessage}</Text>
-        </LinearGradient>
+            >
+                <Image source={imageSource} style={{ width: 36, height: 36 }} />
+                <Text style={styles.scanText}>{alertMessage}</Text>
+            </LinearGradient>
         );
     }
 

@@ -1,11 +1,17 @@
+import { VirusTotalAnalysis } from "@/interfaces/VirusTotalAnalysis";
+
 const apiKey = process.env.EXPO_PUBLIC_VIRUSTOTAL_API_KEY;
 
 /*
     This function sends the obtained URL from scan to VirusTotal API. Using the POST method it will check if the URL exists and return and ID
 */
-export async function scanUrl (url: string): Promise<string> {
+export async function scanUrl (url: string): Promise<string> {    
+    if (url === "") {
+        throw new Error("Error la URL dada no puede ser vacia.");
+    }
+
     if (!apiKey) {
-        return "Error con las credenciales de acceso";
+        throw new Error("Error con las credenciales de acceso.");
     }
     
     const options = {
@@ -15,7 +21,7 @@ export async function scanUrl (url: string): Promise<string> {
           'content-type': 'application/x-www-form-urlencoded',
           'x-apikey': apiKey
         },
-        body: new URLSearchParams({ url: url })
+        body: new URLSearchParams({ url: url }).toString()
     };
 
     try {
@@ -24,7 +30,7 @@ export async function scanUrl (url: string): Promise<string> {
 
         if (!response.ok) {
             const error = json?.error;
-             return `Error en la solicitud a VirusTotal: ${response.status} - ${error.message}`;
+             throw new Error(`Error en la solicitud a VirusTotal: ${response.status} - ${error.message}`);
         }
         
         const { id } = json.data;
@@ -34,14 +40,14 @@ export async function scanUrl (url: string): Promise<string> {
         const scannedUrlId = id.split("-")?.at(1) ?? "";
         return scannedUrlId;
     } catch (error) {
-        return `Error en la solicitud: ${error?.message}`;
+         throw new Error(`Error en la solicitud: ${error?.message}`);
     }
 }
 
 /*
     This function sends the id obtained by scanning the URL to obtain the result
 */
-export async function getUrlReportAnalysis (id: string) {
+export async function getUrlReportAnalysis (id: string): Promise<VirusTotalAnalysis> {
     const analysisOptions = {
         method: 'GET',
         headers: {
@@ -56,11 +62,18 @@ export async function getUrlReportAnalysis (id: string) {
         
         if (!response.ok) {
             const error = json?.error;
-            return `Error en la solicitud a VirusTotal: ${response.status} - ${error.message}`;
+            throw new Error(`Error en la solicitud a VirusTotal: ${response.status} - ${error.message}`);
         }
 
-        return json;
+        const { attributes } = json.data;
+        const result: VirusTotalAnalysis = {
+            last_analysis_stats: attributes.last_analysis_stats,
+            last_analysis_results: attributes.last_analysis_results
+        }
+
+        console.log(result)
+        return result;
     } catch (error) {
-        return `Error en la solicitud: ${error?.message}`
+        throw new Error(`Error en la solicitud: ${error?.message}`);
     }
 }

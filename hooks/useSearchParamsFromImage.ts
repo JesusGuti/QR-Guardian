@@ -9,6 +9,11 @@ import {
     checkIfThereAreHops,
     checkIfIsValidURL
 } from "@/services/checkUrl";
+import {
+    scanUrl,
+    getUrlReportAnalysis
+} from "@/services/getUrlReport";
+
 
 export function useSearchParamsFromImage () {
     const { uri, qrdata } = useLocalSearchParams();
@@ -20,26 +25,30 @@ export function useSearchParamsFromImage () {
         const scannedQR = JSON.parse(qrdata.toString());
         const { data } = scannedQR;
 
-        if (checkIfIsValidURL(data)) {
-            setObtainedURL(data);
-            setScanData(scanAlertSchema.selected);
-
-            setTimeout(async () => {
-                const urlAfterCheckHops = await checkIfThereAreHops(data);
-                
-                if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
-                    setObtainedURL(urlAfterCheckHops);
-                    setIsUrlShorten(true);
-                    setScanData({
-                        ...scanAlertSchema.shorten
-                    });
-                }
-            }, 2000);
-
+        if (!checkIfIsValidURL(data)) {
+            setScanData(scanAlertSchema.error);   
             return;
         }
 
-        setScanData(scanAlertSchema.error);       
+        setObtainedURL(data);
+        setScanData(scanAlertSchema.selected);
+
+        setTimeout(async () => {
+            const urlAfterCheckHops = await checkIfThereAreHops(data);
+            
+            if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
+                setObtainedURL(urlAfterCheckHops);
+                setIsUrlShorten(true);
+                setScanData({
+                    ...scanAlertSchema.shorten
+                });
+            }
+
+            // Send to Virus Total API
+            const urlID = await scanUrl('metamaaskloginc.webflow.io')
+            const results = await getUrlReportAnalysis(urlID) 
+            console.log(results)
+        }, 1500);    
     }, [qrdata]);   
 
     return {
