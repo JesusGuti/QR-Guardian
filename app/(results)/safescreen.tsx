@@ -1,18 +1,19 @@
+import CheckedShieldIcon from "@/assets/svg/CheckedShieldIcon";
+import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 import { safeGradient } from "@/constants/gradientSchema";
+import { ResultButton } from "@/components/ResultsComponents/ResultButton";
+import { useLocalSearchParams } from "expo-router";
 import { 
     StyleSheet, 
     Text, 
     Linking 
 } from "react-native";
-import { ResultButton } from "@/components/ResultsComponents/ResultButton";
-import CheckedShieldIcon from "@/assets/svg/CheckedShieldIcon";
-import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 
 export default function SafeScreen () {
-    const url = "https://youtube.com";
+    const { url } = useLocalSearchParams();
 
     const handlePress = () => {
-        Linking.openURL(url).catch(err => console.error("Ocurrio un error al abrir el enlace", err));
+        Linking.openURL(url.toString()).catch(err => console.error("Ocurrio un error al abrir el enlace", err));
     }
     
     return (
