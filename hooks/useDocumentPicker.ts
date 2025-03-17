@@ -1,19 +1,26 @@
 import { getDocumentAsync } from "expo-document-picker";
+import { NavigationContext } from "@/contexts/NavigationProvider";
 import { 
     BarcodeScanningResult, 
     scanFromURLAsync 
 } from "expo-camera";
 import {
     useState,
-    useEffect
+    useEffect,
+    useContext
 } from "react";
-import { useRouter } from "expo-router";
 
 const MIN_NUMBER_OF_FILES = 0;
 
 export function useDocumentPicker () {
-    const router = useRouter();
     const [showMessageError, setShowMessageError] = useState<boolean>(false);
+    const navigationContext = useContext(NavigationContext);
+    
+    if (!navigationContext) {
+        throw new Error("NavigationContext no está disponible.");
+    }
+
+    const { router } = navigationContext;
 
     useEffect(() => {
         if (showMessageError) {

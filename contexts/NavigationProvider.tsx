@@ -1,12 +1,16 @@
-import { createContext } from "react";
+import { 
+    createContext,
+    PropsWithChildren
+} from "react";
 import { 
     useRouter, 
     Router 
 } from "expo-router";
 
-export const NavigationContext = createContext<Router | null>(null);
+export const NavigationContext = createContext<{ router: Router} | null>(null);
 
-export function NavigationProvider ({ children }) {
+type Props = PropsWithChildren<object>;
+export function NavigationProvider ({ children }: Props) {
     const router = useRouter();
 
     return (

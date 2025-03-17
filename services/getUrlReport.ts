@@ -39,8 +39,12 @@ export async function scanUrl (url: string): Promise<string> {
 
         const scannedUrlId = id.split("-")?.at(1) ?? "";
         return scannedUrlId;
-    } catch (error) {
-         throw new Error(`Error en la solicitud: ${error?.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Error en la solicitud: ${error?.message}`);
+        } else {
+            throw new Error("Ocurrio un erroor desconocido en la solicitud");
+        }
     }
 }
 
@@ -68,12 +72,18 @@ export async function getUrlReportAnalysis (id: string): Promise<VirusTotalAnaly
         const { attributes } = json.data;
         const result: VirusTotalAnalysis = {
             last_analysis_stats: attributes.last_analysis_stats,
-            last_analysis_results: attributes.last_analysis_results
+            last_analysis_results: attributes.last_analysis_results,
+            last_final_url: attributes.last_final_url,
+            url: attributes.url
         }
 
         return result;
-    } catch (error) {
-        throw new Error(`Error en la solicitud: ${error?.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Error en la solicitud: ${error?.message}`);
+        } else {
+            throw new Error("Ocurrio un erroor desconocido en la solicitud");
+        }
     }
 }
 

@@ -15,5 +15,8 @@ export interface VirusTotalAnalysis {
             category: string;
             result: string;
         }
-    >
+    >;
+
+    last_final_url: string;
+    url: string
 }
