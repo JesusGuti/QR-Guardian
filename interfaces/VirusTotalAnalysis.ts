@@ -18,5 +18,5 @@ export interface VirusTotalAnalysis {
     >;
 
     last_final_url: string;
-    url: string
+    url: string;
 }

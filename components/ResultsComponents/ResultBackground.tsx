@@ -6,9 +6,10 @@ import BackButton from "../ui/BackButton";
 type Props = PropsWithChildren<{
     colors: readonly [string, string] 
     locations: readonly [number, number] 
+    showButton: boolean
 }>
 
-export default function ResultBackground ({ colors, locations, children }: Props) {
+export default function ResultBackground ({ colors, locations, showButton, children }: Props) {
     return (
         <LinearGradient
             colors={colors}
@@ -17,7 +18,7 @@ export default function ResultBackground ({ colors, locations, children }: Props
 
             }
         >
-            <BackButton route="../" />
+            {showButton && <BackButton route="../" />}
             {children}
         </LinearGradient>
     );

@@ -57,7 +57,7 @@ export function useBarcodeScanner () {
                 if (isUrlSafe(results)) {
                     router.replace({ pathname: "/(results)/safescreen", params: { url: results.last_final_url } });
                 } else {
-                    router.replace({ pathname: "/(results)/dangerscreen", params: { results: JSON.stringify(results)} })
+                    router.replace({ pathname: "/(results)/dangerscreen", params: { url: data, results: JSON.stringify(results) } })
                 }
             }, 1500)
              
