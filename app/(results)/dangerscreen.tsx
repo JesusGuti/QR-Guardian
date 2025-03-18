@@ -1,27 +1,51 @@
 import { dangerGradient } from "@/constants/gradientSchema";
+import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import {
     StyleSheet,
     Text
 } from "react-native"
-import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import AlertIcon from "@/assets/svg/AlertIcon";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
+import DetailsScreen from "../(details)/detailsscreen";
+import { useShowDetails } from "@/hooks/useShowDetails";
 
 export default function DangerScreen () {
+    const { 
+        showDetails, 
+        setShowDetails,
+        urlScanned,
+        finalUrl,
+        totalScans,
+        maliciousScans
+    } = useShowDetails()    
+
     return (
         <ResultBackground
             colors={dangerGradient.colors}
             locations={dangerGradient.locations}
-            >
-            <AlertIcon />
-            <Text style={styles.alertText}>¡Alerta Potencial de Seguridad!</Text>
-            <Text style={styles.description}>El c&oacute;digo QR escaneado puede ser un caso de quishing</Text>
-            <ResultButton 
-                handlePress={() => {}}
-                buttonText="Ver detalles"
-                buttonStyle={null}
-                textStyle={styles.buttonText}
-            />
+            showButton={!showDetails}
+        >
+            {
+                showDetails ? 
+                    <DetailsScreen 
+                        url={urlScanned}
+                        finalUrl={finalUrl}
+                        maliciousScans={maliciousScans}
+                        totalScans={totalScans}
+                    />
+                :   
+                    <>
+                        <AlertIcon />
+                        <Text style={styles.alertText}>¡Alerta Potencial de Seguridad!</Text>
+                        <Text style={styles.description}>El c&oacute;digo QR escaneado puede ser un caso de quishing</Text>
+                        <ResultButton 
+                            handlePress={() => {setShowDetails(true)}}
+                            buttonText="Ver detalles"
+                            buttonStyle={null}
+                            textStyle={styles.buttonText}
+                        />
+                    </>
+            }
         </ResultBackground>
     );
 }

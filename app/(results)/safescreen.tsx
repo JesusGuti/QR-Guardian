@@ -20,6 +20,7 @@ export default function SafeScreen () {
         <ResultBackground
             colors={safeGradient.colors}
             locations={safeGradient.locations}
+            showButton={true}
         >
             <CheckedShieldIcon />
             <Text style={styles.text}>C&oacute;digo QR seguro</Text>
