@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { VirusTotalAnalysis } from "@/interfaces/VirusTotalAnalysis";
 import { FilteredAnalysisResult } from "@/interfaces/FilteredAnalysisResult";
-
-const MALICIOUS_VALUE = "malicious";
-const SUSPICIOUS_VALUE = "suspicious";
-const PHISHING_VALUE = "phishing";
+import {
+    MALICIOUS_VALUE,
+    MALWARE_VALUE,
+    PHISHING_VALUE,
+    SUSPICIOUS_VALUE
+} from "@/constants/resultMessage";
 
 export function useShowDetails () {
     const [showDetails, setShowDetails] = useState(false);
@@ -42,10 +44,10 @@ export function useShowDetails () {
 function filterEngineScanners (analysis: VirusTotalAnalysis): FilteredAnalysisResult[] {
     const { last_analysis_results } = analysis;
     const filteredResults: FilteredAnalysisResult[] = Object.values(last_analysis_results)
-        .filter((value) => value.result === MALICIOUS_VALUE || value.result === SUSPICIOUS_VALUE ||
-                value.result === PHISHING_VALUE || value.category === MALICIOUS_VALUE || 
-                value.category === SUSPICIOUS_VALUE || value.category === PHISHING_VALUE
-    );
+        .filter((value) => 
+            [MALICIOUS_VALUE, SUSPICIOUS_VALUE, PHISHING_VALUE, MALWARE_VALUE].includes(value.result) ||
+            [MALICIOUS_VALUE, SUSPICIOUS_VALUE, PHISHING_VALUE, MALWARE_VALUE].includes(value.category)
+    ).sort((a, b) => a.engine_name.localeCompare(b.engine_name));
 
     return filteredResults;
 }

@@ -1,13 +1,17 @@
 import EngineCounter from "@/components/DetailsComponents/EngineCounter";
+import EngineList from "@/components/DetailsComponents/EngineList";
 import UrlDetail from "@/components/DetailsComponents/UrlDetail";
-import { PropsWithChildren } from "react";
-import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import { FilteredAnalysisResult } from "@/interfaces/FilteredAnalysisResult";
+import { ResultButton } from "@/components/ResultsComponents/ResultButton";
+import { NavigationContext } from "@/contexts/NavigationProvider";
+import { 
+    PropsWithChildren,
+    useContext
+} from "react";
 import {
     StyleSheet,
     Text
 } from "react-native";
-import EngineList from "@/components/DetailsComponents/EngineList";
 
 type Props = PropsWithChildren<{
     url: string,
@@ -18,6 +22,18 @@ type Props = PropsWithChildren<{
 }>
 
 export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalScans, enginesList }: Props) {
+    const navigationContext = useContext(NavigationContext);
+    
+    if (!navigationContext) {
+        throw new Error("NavigationContext no está disponible.");
+    }
+
+    const { router } = navigationContext;
+    
+    const returnToMenu = () => {
+        router.replace("/")
+    }
+
     return (
         <>
             <Text style={styles.title}>Detalles de la Amenaza</Text>
@@ -38,7 +54,7 @@ export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalSca
         
             <EngineList enginesList={enginesList}/>
             <ResultButton 
-                handlePress={() => {}}
+                handlePress={returnToMenu}
                 buttonText="Salir"
                 buttonStyle={null}
                 textStyle={styles.buttonText}
