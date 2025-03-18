@@ -2,19 +2,22 @@ import EngineCounter from "@/components/DetailsComponents/EngineCounter";
 import UrlDetail from "@/components/DetailsComponents/UrlDetail";
 import { PropsWithChildren } from "react";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
+import { FilteredAnalysisResult } from "@/interfaces/FilteredAnalysisResult";
 import {
     StyleSheet,
     Text
 } from "react-native";
+import EngineList from "@/components/DetailsComponents/EngineList";
 
 type Props = PropsWithChildren<{
     url: string,
     finalUrl: string,
     maliciousScans: number
     totalScans: number
+    enginesList: FilteredAnalysisResult[] | null
 }>
 
-export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalScans }: Props) {
+export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalScans, enginesList }: Props) {
     return (
         <>
             <Text style={styles.title}>Detalles de la Amenaza</Text>
@@ -32,8 +35,8 @@ export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalSca
             />
 
             <Text style={styles.titleEngine}>Motores de escaneo</Text>
-            
-            
+        
+            <EngineList enginesList={enginesList}/>
             <ResultButton 
                 handlePress={() => {}}
                 buttonText="Salir"

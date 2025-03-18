@@ -1,5 +1,6 @@
 import { dangerGradient } from "@/constants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
+import { useShowDetails } from "@/hooks/useShowDetails";
 import {
     StyleSheet,
     Text
@@ -7,7 +8,6 @@ import {
 import AlertIcon from "@/assets/svg/AlertIcon";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 import DetailsScreen from "../(details)/detailsscreen";
-import { useShowDetails } from "@/hooks/useShowDetails";
 
 export default function DangerScreen () {
     const { 
@@ -16,7 +16,8 @@ export default function DangerScreen () {
         urlScanned,
         finalUrl,
         totalScans,
-        maliciousScans
+        maliciousScans,
+        enginesList
     } = useShowDetails()    
 
     return (
@@ -32,6 +33,7 @@ export default function DangerScreen () {
                         finalUrl={finalUrl}
                         maliciousScans={maliciousScans}
                         totalScans={totalScans}
+                        enginesList={enginesList}
                     />
                 :   
                     <>
