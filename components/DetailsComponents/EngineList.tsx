@@ -47,7 +47,11 @@ export default function EngineList ({ enginesList }: Props) {
 
     const showRealMessage = (originalMessage: string) => {
         const checkIndex = messages.find((item) => item.originalMessage === originalMessage);
-        return checkIndex?.finalMessage;
+        if (checkIndex) return checkIndex?.finalMessage;
+        
+        const firstLetter = originalMessage.at(0)?.toUpperCase();
+        const restOfWord = originalMessage.slice(1, originalMessage.length - 1);
+        return firstLetter + restOfWord;
     }
 
     return (
