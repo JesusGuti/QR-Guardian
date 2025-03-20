@@ -5,8 +5,8 @@ import {
     Pressable
 } from "react-native";
 import { PropsWithChildren } from "react";
-import { ShieldIcon } from "@/assets/svg/ShieldIcon";
 import BackButton from "@/components/ui/BackButton";
+import Shield from "../ui/Shield";
 
 
 type Props = PropsWithChildren<{
@@ -17,8 +17,8 @@ export default function PermissionView ({ requestPermission }: Props) {
     return (
         <View style={styles.container}>
             <BackButton route='../' />
-            <ShieldIcon />
             <Text style={styles.title}>QR GUARDIAN</Text>
+            <Shield />
             <Text style={styles.message}>Necesita permisos de c&aacute;mara para analizar un c&oacute;digo QR. Por favor presione el siguiente bot&oacute;n</Text>
             <Pressable style={styles.button} onPress={requestPermission}>
                 <Text style={styles.buttonText}>Dar permiso a la c&aacute;mara</Text>
@@ -35,14 +35,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: '#000'
     },
 
     title: {
         color: '#fff',
         fontSize: 35,
         fontWeight: '600',
-        marginBottom: 70,
+        marginBottom: 20,
         marginLeft: 'auto',
         marginRight: 'auto'
       },
@@ -50,18 +51,19 @@ const styles = StyleSheet.create({
     message: {
         marginLeft: 'auto',
         marginRight: 'auto',
-        width: 400,
+        width: 350,
         textAlign: 'center',
         paddingBottom: 10,  
-        color: '#fff'
+        color: '#fff',
+        fontSize: 16
     },
     
     button: {
         margin: 'auto',
-        width: 200,
-        padding: 15,
+        width: 220,
+        padding: 20,
         borderRadius: 10,
-        marginVertical: 10,
+        marginVertical: 20,
         backgroundColor: '#2196F3',
         gap: 15,
         display: 'flex',
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     },
     
     buttonText: {
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: 500,
         color: '#fff'
     }
