@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: '#000'
     },
 
     title: {
