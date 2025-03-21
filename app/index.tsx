@@ -31,7 +31,6 @@ export default function HomeScreen() {
             route='./'
             buttonFunction={pickImageAndScan}
         />
-        <Text style={styles.env}>{process.env.EXPO_PUBLIC_VIRUSTOTAL_API_KEY}</Text>
     </View>
   );
 }
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000'
+    backgroundColor: '#000',
   },
 
   title: {
@@ -49,12 +48,5 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: '600',
     marginBottom: 20,
-  },
-
-  env: {
-    color: '#fff',
-    fontSize: 10,
-    // position: 'absolute',
-    bottom: 0
   }
 });
