@@ -30,8 +30,9 @@ Se desarrollo el proyecto usando las siguientes tecnologias
 **OPCIONAL**
 
 - Se puede instalar Android Studio, por defecto trae un SDK actual y un dispositivo recomendado.
-## APK 
-Se tiene la siguiente APK 
+
+## APK
+Para instalar la APK puede ingresar al apartado 
 
 ## Ejecutar de Forma Local
 
