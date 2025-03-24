@@ -31,9 +31,6 @@ Se desarrollo el proyecto usando las siguientes tecnologias
 
 - Se puede instalar Android Studio, por defecto trae un SDK actual y un dispositivo recomendado.
 
-## APK
-Para instalar la APK puede ingresar al apartado 
-
 ## Ejecutar de Forma Local
 
 1. Clonar el proyecto
