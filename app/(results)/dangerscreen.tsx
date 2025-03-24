@@ -39,7 +39,7 @@ export default function DangerScreen () {
                     <>
                         <AlertIcon />
                         <Text style={styles.alertText}>¡Alerta Potencial de Seguridad!</Text>
-                        <Text style={styles.description}>El c&oacute;digo QR escaneado puede ser un caso de quishing</Text>
+                        <Text style={styles.description}>El c&oacute;digo QR escaneado es un caso de quishing</Text>
                         <ResultButton 
                             handlePress={() => {setShowDetails(true)}}
                             buttonText="Ver detalles"

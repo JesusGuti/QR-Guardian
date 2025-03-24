@@ -9,7 +9,9 @@ import {
 import { 
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
-    checkIfIsValidURL
+    checkIfIsValidURL,
+    checkIfDomainIsSuspicious,
+    checkIfTLDIsRare
 } from "@/services/checkUrl";
 import {
     isUrlSafe,
@@ -56,11 +58,17 @@ export function useSearchParamsFromImage () {
             const urlID = await scanUrl(urlAfterCheckHops);
             const results = await getUrlReportAnalysis(urlID);
 
-            if (isUrlSafe(results)) {
-                router.replace({ pathname: "/(results)/safescreen", params: { url: results.last_final_url } });
-            } else {
-                router.replace({ pathname: "/(results)/dangerscreen", params: { url: data, results: JSON.stringify(results)} })
+            if (!isUrlSafe(results)) {
+                router.replace({ pathname: "/(results)/dangerscreen", params: { url: data, results: JSON.stringify(results) } });
+                return;
+            } 
+
+            if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data)) {
+                router.replace({ pathname: "/(results)/suspiciousscreen", params: { url: data, results: JSON.stringify(results) } });
+                return;
             }
+
+            router.replace({ pathname: "/(results)/safescreen", params: { url: results.last_final_url } });
         }, 1500);    
     }, [qrdata]);   
 
