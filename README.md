@@ -1,50 +1,70 @@
-# Welcome to your Expo app 👋
+<div style="text-align: center;">
+  <img src="assets/readme/QRGuardian-Logo.png" alt="Logo">
+</div>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Prototipo de Aplicación para Detección y Prevención de Quishing - QRGuardian
 
-## Get started
 
-1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+QrGuardian es un prototipo de aplicación para la detección de ataques relacionados con Quishing (un nuevo tipo de phishing usando códigos QR).
 
-2. Start the app
+## Autor
 
-   ```bash
-    npx expo start
-   ```
+- [@Jesus Alessandro Gutierrez Gonzales](https://github.com/JesusGuti)
 
-In the output, you'll find options to open the app in a
+## Stack de Tecnología usada
+Se desarrollo el proyecto usando las siguientes tecnologias
+<div style="display: flex; flex-direction:row; text-align: center; gap: 30px; justify-content: center;">
+  <img src="assets/readme/expo.webp" alt="Expo PNG" width="100" height="100">
+  <img src="assets/readme/react-native.png" alt="Expo PNG" width="80" height="100">
+  <img src="assets/readme/node.png" alt="Node" width="150" height="100">
+  <img src="assets/readme/typescript.png" alt="Typescript" width="100" height="100" style="border-radius: 10px;">
+</div>
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Prerrequisitos
+**NECESARIO**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Es necesario tener instalado Node y npm configurado para poder ejecutar de forma local la aplicación.
+- Se debe instalar Expo Go https://expo.dev/go, está disponible en Android e iOS.
 
-## Get a fresh project
+**OPCIONAL**
 
-When you're ready, run:
+- Se puede instalar Android Studio, por defecto trae un SDK actual y un dispositivo recomendado.
+## APK 
+Se tiene la siguiente APK 
+
+## Ejecutar de Forma Local
+
+1. Clonar el proyecto
 
 ```bash
-npm run reset-project
+  git clone https://github.com/JesusGuti/QR-Guardian.git
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Ir al directorio
 
-## Learn more
+```bash
+  cd QR-Guardian
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Instalar dependencias
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+  npm install
+```
 
-## Join the community
+4. Iniciar la aplicación 
 
-Join our community of developers creating universal apps.
+```bash
+  npx expo start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+En la salida de este comando tendra la opción para abrir la aplicación en diferentes entornos:
+![Salida del comando npx expo start](assets/readme/salida-expo.png)
+- [Expo Go - Recomendado](https://expo.dev/go):  Dentro de la aplicación de Expo Go, se puede  escanear el código QR que se muestra en terminal . De esta forma se podrá mostrar la simulación de la aplicación usando Expo Go.
+![Expo Go](assets/readme/expoGo.png)
+
+- [Emulador de Android](https://docs.expo.dev/workflow/android-studio-emulator/): Para eso será necesario instalar Android Studio, junto al SDK 35 sugerido por Expo 52.0 
+
+- [Build de desarrollo](https://docs.expo.dev/develop/development-builds/introduction/)
+
