@@ -49,7 +49,6 @@ function filterEngineScanners (analysis: VirusTotalAnalysis): FilteredAnalysisRe
             [MALICIOUS_VALUE, SUSPICIOUS_VALUE, PHISHING_VALUE, MALWARE_VALUE].includes(value.category)
     ).sort((a, b) => a.engine_name.localeCompare(b.engine_name));
 
-    console.log(filteredResults)
     return filteredResults;
 }
 
