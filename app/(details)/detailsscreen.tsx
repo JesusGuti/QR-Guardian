@@ -43,11 +43,12 @@ export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalSca
             />
             {
                 url === finalUrl ? 
+                    null
+                :
                     <UrlDetail 
                         description="URL acortada o redireccionada"
                         url={finalUrl}
                     />
-                :   null
             }
             <EngineCounter 
                 maliciousScans={maliciousScans}

@@ -22,10 +22,12 @@ import {
 } from "@/services/getUrlReport";
 
 export function useBarcodeScanner () {
-    const throttleDelay = 4000;
+    const throttleDelay = 2000;
     const [obtainedURL, setObtainedURL] = useState("");
     const [scanData, setScanData] = useState(scanAlertSchema.info)
     const [isUrlShorten, setIsUrlShorten] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [hasRedirected, setHasRedirected] = useState(false);
     const navigationContext = useContext(NavigationContext);
 
     if (!navigationContext) {
@@ -36,13 +38,17 @@ export function useBarcodeScanner () {
 
     // No matter hoy many times the function is called, only invoke once withing the given interval
     const throttledSetObtainedURL = useRef(
-        throttle((data: string) => {
+        throttle(async (data: string) => {
+            if (hasRedirected) return;
+
             setObtainedURL(data);
             setScanData({
                 ...scanAlertSchema.scanned
             })
+            
+            setIsProcessing(true);
 
-            setTimeout(async () => {
+            try {
                 const urlAfterCheckHops = await checkIfThereAreHops(data);
 
                 if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
@@ -50,30 +56,41 @@ export function useBarcodeScanner () {
                     setIsUrlShorten(true);
                     setScanData({
                         ...scanAlertSchema.shorten
-                    })
+                    });
                 }
 
                 const urlID = await scanUrl(urlAfterCheckHops);
                 const results = await getUrlReportAnalysis(urlID);
-    
+            
                 if (!isUrlSafe(results)) {
+                    setHasRedirected(true);
                     router.replace({ pathname: "/(results)/dangerscreen", params: { url: data, results: JSON.stringify(results) } });
                     return;
                 } 
 
                 if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data)) {
+                    setHasRedirected(true);
                     router.replace({ pathname: "/(results)/suspiciousscreen", params: { url: data, results: JSON.stringify(results) } });
                     return;
                 }
 
+                setHasRedirected(true);
                 router.replace({ pathname: "/(results)/safescreen", params: { url: results.last_final_url } });
-            }, 1500)
-             
+            } catch (error) {
+                setScanData({
+                    ...scanAlertSchema.failed
+                });      
+                console.error(error);
+            } finally {
+                setIsProcessing(false);
+                setHasRedirected(false);
+            }
         }, throttleDelay)
     ).current;
 
     const handleBarcodeScanner = useCallback(
          (scanningResult: BarcodeScanningResult) => {
+            if (isProcessing || hasRedirected) return;
             const { data } = scanningResult;
 
             if (!checkIfIsValidURL(data)) {
@@ -86,7 +103,7 @@ export function useBarcodeScanner () {
 
             throttledSetObtainedURL(data);
          }
-    , [throttledSetObtainedURL]);
+    , [throttledSetObtainedURL, isProcessing, hasRedirected]);
 
     return { 
         obtainedURL, 
