@@ -1,7 +1,7 @@
 export const PHISHING_VALUE = 'phishing';
 export const MALWARE_VALUE = 'malware';
 export const MALICIOUS_VALUE = 'malicious';
-export const SUSPICIOUS_VALUE = 'phishing';
+export const SUSPICIOUS_VALUE = 'suspicious';
 
 export const messages = [
     {

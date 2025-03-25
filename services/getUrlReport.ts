@@ -77,7 +77,7 @@ export async function getUrlReportAnalysis (id: string): Promise<VirusTotalAnaly
             url: attributes.url
         }
 
-        // console.log(`Resultados ${result.last_analysis_stats}`,result.last_analysis_results)
+        console.log(result)
         return result;
     } catch (error: unknown) {
         if (error instanceof Error) {
