@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 300,
         justifyContent: 'space-between',
-        padding: 5
+        padding: 5,
+        marginLeft: -20
     },
 
     title: {
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 10,
         borderRadius: 10,
-        marginLeft: 40
+        marginLeft: 50
     }, 
     
     boxCountText: {

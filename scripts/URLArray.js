@@ -1,6 +1,6 @@
 export const URLArray = [
     'c4munitionoffwithe001x.web.app',
-    'http://posgradovirtual.fcyt.umss.edu.bo/',
+    'http://posgradovirtual.fcyt.umss.edu.bo/', // SEGURO
     'c4ncelarc0mprasg.vercel.app',
     'https://tinyurl.com/fcyt-admision',
     'c4ncelarsucurs4ls.vercel.app',

@@ -21,11 +21,12 @@ export default function UrlDetail ({ description, url }: Props) {
 
 const styles = StyleSheet.create({
     detail: {
-        width: 320,
+        width: 350,
         display: 'flex',
         gap: 5,
         marginTop: 20,
-        padding: 5
+        marginLeft: 30,
+        padding: 5,
     },
 
     description: {
@@ -38,5 +39,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         textDecorationLine: 'underline',
+        fontWeight: 400
     }
 });
