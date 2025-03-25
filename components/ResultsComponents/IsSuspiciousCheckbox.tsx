@@ -18,6 +18,7 @@ export default function IsSuspiciousCheckbox ({ text, checked }: Props) {
             <Checkbox 
                 style={styles.checkbox}
                 value={checked}
+                color={'#F28F51'}
             />
         </View>
     )

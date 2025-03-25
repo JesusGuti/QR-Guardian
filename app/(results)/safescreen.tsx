@@ -1,6 +1,6 @@
+import AlertText from "@/components/ResultsComponents/AlertText";
 import CheckedShieldIcon from "@/assets/svg/CheckedShieldIcon";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
-import { AlertText } from "@/components/ResultsComponents/AlertText";
 import { safeGradient } from "@/constants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import { useLocalSearchParams } from "expo-router";

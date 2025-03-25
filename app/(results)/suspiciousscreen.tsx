@@ -1,17 +1,17 @@
 import AlertText from "@/components/ResultsComponents/AlertText";
 import Description from "@/components/ResultsComponents/Description";
+import IsSuspiciousCheckbox from "@/components/ResultsComponents/IsSuspiciousCheckbox";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 import suspiciousIcon from "@/assets/images/suspicious-icon.png"
 import { suspiciousGradient } from "@/constants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
+import { useShowSuspiciousDetails } from "@/hooks/useShowSuspiciousDetails";
 import { 
     Image,
     StyleSheet, 
     Text, 
     View 
 } from "react-native";
-import { useShowSuspiciousDetails } from "@/hooks/useShowSuspiciousDetails";
-import IsSuspiciousCheckbox from "@/components/ResultsComponents/IsSuspiciousCheckbox";
 
 export default function SuspiciousScreen () {   
     const { 
@@ -20,6 +20,28 @@ export default function SuspiciousScreen () {
         isDomainChecked,
         isTLDChecked 
     } = useShowSuspiciousDetails();
+
+    const highlightSuspiciousPart = () => {
+        try {
+            const urlObject = new URL(url);
+            const { hostname, protocol, pathname } = urlObject;
+            const splittedDomain = hostname.split(".");
+            const TLD = splittedDomain.pop();
+
+            return (
+                <Text style={styles.url}>
+                    {protocol}//
+                    <Text style={isDomainChecked ? styles.suspiciousPart : styles.url}>{splittedDomain.join(".")}.</Text>
+                    <Text style={isTLDChecked ? styles.suspiciousPart : styles.url}>{TLD}</Text>
+                    {pathname}
+                </Text>
+            );
+        } catch (error) {
+            throw new Error(`Error al resaltar la parte sospechosa de la URL ${error}`);
+        }
+    };
+
+    highlightSuspiciousPart()
 
     return (
         <ResultBackground
@@ -34,7 +56,7 @@ export default function SuspiciousScreen () {
 
             <View style={styles.urlContainer}>
                 <AlertText text={"URL escaneada:"} />
-                <Text style={styles.url}>{url}</Text>
+                <Text style={styles.url}>{highlightSuspiciousPart()}</Text>
             </View>
 
             <IsSuspiciousCheckbox text={"¿TLD sospechoso?"} checked={isDomainChecked} />
@@ -77,6 +99,12 @@ const styles = StyleSheet.create({
     url: {
         color: '#fff',
         fontSize: 18,
+    },
+
+    suspiciousPart: {
+        color: '#F28F51',
+        fontSize: 18,
+        fontWeight: '800'
     },
 
     button: {

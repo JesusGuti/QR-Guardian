@@ -1,15 +1,11 @@
 import { Linking } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function useShowSuspiciousDetails() {
     const { url } = useLocalSearchParams();
     const [isTLDChecked, setIsTLDChecked] = useState(false);
     const [isDomainChecked, setIsDomainChecked] = useState(true);
-
-    useEffect(() => {
-
-    }, [url])
  
     const handlePress = () => {
         Linking.openURL(url.toString()).catch(err => console.error("Ocurrio un error al abrir el enlace", err));
@@ -19,6 +15,8 @@ export function useShowSuspiciousDetails() {
         url,
         handlePress,
         isTLDChecked,
-        isDomainChecked
+        isDomainChecked,
+        setIsDomainChecked,
+        setIsTLDChecked
     }
 }
