@@ -1,13 +1,12 @@
+import AlertIcon from "@/assets/svg/AlertIcon";
+import AlertText from "@/components/ResultsComponents/AlertText";
+import Description from "@/components/ResultsComponents/Description";
+import DetailsScreen from "../(details)/detailsscreen";
+import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 import { dangerGradient } from "@/constants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import { useShowDetails } from "@/hooks/useShowDetails";
-import {
-    StyleSheet,
-    Text
-} from "react-native"
-import AlertIcon from "@/assets/svg/AlertIcon";
-import ResultBackground from "@/components/ResultsComponents/ResultBackground";
-import DetailsScreen from "../(details)/detailsscreen";
+import { StyleSheet } from "react-native"
 
 export default function DangerScreen () {
     const { 
@@ -38,8 +37,8 @@ export default function DangerScreen () {
                 :   
                     <>
                         <AlertIcon />
-                        <Text style={styles.alertText}>¡Alerta Potencial de Seguridad!</Text>
-                        <Text style={styles.description}>El c&oacute;digo QR escaneado puede ser un caso de quishing</Text>
+                        <AlertText text={"¡Alerta Potencial de Seguridad!"} />
+                        <Description text={"El código QR escaneado es un caso de quishing"} />
                         <ResultButton 
                             handlePress={() => {setShowDetails(true)}}
                             buttonText="Ver detalles"
@@ -53,21 +52,6 @@ export default function DangerScreen () {
 }
 
 const styles = StyleSheet.create({
-    alertText: {
-        color: '#fff',
-        fontSize: 20,
-        fontWeight: 800,
-        marginBottom: 10
-    },
-
-    description: {
-        width: 300,
-        fontSize: 16,
-        color: '#fff',
-        textAlign: 'center',
-        marginBottom: 30
-    },
-
     buttonText: {
         color: 'rgba(255, 138, 128, 1)',
     }

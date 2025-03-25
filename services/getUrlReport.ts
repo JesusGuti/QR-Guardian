@@ -77,12 +77,13 @@ export async function getUrlReportAnalysis (id: string): Promise<VirusTotalAnaly
             url: attributes.url
         }
 
+        // console.log(`Resultados ${result.last_analysis_stats}`,result.last_analysis_results)
         return result;
     } catch (error: unknown) {
         if (error instanceof Error) {
             throw new Error(`Error en la solicitud: ${error?.message}`);
         } else {
-            throw new Error("Ocurrio un erroor desconocido en la solicitud");
+            throw new Error("Ocurrio un error desconocido en la solicitud");
         }
     }
 }

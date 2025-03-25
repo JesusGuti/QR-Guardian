@@ -1,3 +1,6 @@
+import { suspiciousTLD } from "@/constants/suspiciousTLD";
+import { suspiciousDomainNames } from "@/constants/suspiciousDomainNames";
+
 export function checkIfIsValidURL (data: string) : boolean {
     try {
         new URL(data);
@@ -56,4 +59,31 @@ export function areOriginalUrlAndHoppedSimilar (url: string, hoppedUrl: string):
     if (urlObject.protocol !== hoppedUrlObject.protocol) return false;
     
     return true;
+}
+
+export function checkIfTLDIsRare (url: string): boolean {
+    try {
+        const urlObject = new URL(url);
+        const hostname = urlObject.hostname;
+        const parts = hostname.split('.');
+        // The last part of the URL is the TLD
+        const tld = parts[parts.length - 1];
+
+        return suspiciousTLD.includes(tld);
+    } catch (error) {
+        throw new Error(`Ocurrio un error al obtener el TLD ${error}`);
+    } 
+}
+
+export function checkIfDomainIsSuspicious (url: string): boolean {
+    try {
+        const urlObject = new URL(url);
+        const hostname = urlObject.hostname;
+        const parts = hostname.split('.');
+        const checkDomain = parts.map(part => suspiciousDomainNames.includes(part));
+
+        return checkDomain.includes(true);
+    } catch (error) {
+        throw new Error(`Ocurrio un error al obtener el dominio ${error}`);
+    }
 }
