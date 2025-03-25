@@ -23,5 +23,10 @@ export const scanAlertSchema = {
         scanStatus: 'error',
         icon: '@/assets/images/unlink.png',
         message: 'El código QR no contiene una URL'
+    },
+    failed: {
+        scanStatus: 'error',
+        icon: '@/assets/images/unlink.png',
+        message: 'Hubo un error en la solicitud.'
     }
 }

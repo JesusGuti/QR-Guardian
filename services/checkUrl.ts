@@ -37,8 +37,7 @@ export async function checkIfThereAreHops (url: string): Promise<string> {
 
         return currentUrl;
     } catch (error) {
-        console.error(`Ocurrio un error en la solicitud ${error}`);
-        return "Ocurrio un error en la solicitud."
+        throw new Error(`Ocurrio un error en la solicitud ${error}`);
     }
 }
 

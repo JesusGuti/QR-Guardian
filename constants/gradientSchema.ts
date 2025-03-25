@@ -14,8 +14,8 @@ export const dangerGradient = {
 };
     
 export const safeGradient = {
-    colors: ['rgba(142, 252, 95, 0.9)', 'rgba(102, 187, 106, 0.7)'] as const,
-    locations: [0.7, 1] as const 
+    colors: ['rgba(115, 224, 68, 0.9)', 'rgba(102, 187, 106, 0.7)'] as const,
+    locations: [0.6, 1] as const 
 };
 
 export const suspiciousGradient = {

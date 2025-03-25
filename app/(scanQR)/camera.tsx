@@ -39,7 +39,7 @@ export default function Camera () {
         <View style={styles.container}>
             <BackButton route='../' />
             {isUrlShorten && <Text style={styles.shorten}>URL ACORTADA</Text>}
-            <Text style={styles.url}>{obtainedURL}</Text>
+            <Text style={styles.url} numberOfLines={4} ellipsizeMode="tail">{obtainedURL}</Text>
             <Overlay />
             <CameraBorder />
             <CameraView 

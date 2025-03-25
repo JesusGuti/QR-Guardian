@@ -39,7 +39,9 @@ export default function EngineList ({ enginesList }: Props) {
             case SUSPICIOUS_VALUE:
                 image = suspiciousIcon;
                 break;  
-            default: break;
+            default: 
+                image = suspiciousIcon;
+                break;
         }
 
         return image
@@ -50,7 +52,7 @@ export default function EngineList ({ enginesList }: Props) {
         if (checkIndex) return checkIndex?.finalMessage;
         
         const firstLetter = originalMessage.at(0)?.toUpperCase();
-        const restOfWord = originalMessage.slice(1, originalMessage.length - 1);
+        const restOfWord = originalMessage.slice(1, originalMessage.length);
         return firstLetter + restOfWord;
     }
 
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
 
     engineResult: {
         display: 'flex',
-        width: 105,
+        width: 115,
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10

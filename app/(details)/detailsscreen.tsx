@@ -10,7 +10,7 @@ import {
 } from "react";
 import {
     StyleSheet,
-    Text
+    Text,
 } from "react-native";
 
 type Props = PropsWithChildren<{
@@ -38,13 +38,20 @@ export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalSca
         <>
             <Text style={styles.title}>Detalles de la Amenaza</Text>
             <UrlDetail 
-                description="URL escaneada"
-                url={url}
-            />
-            <UrlDetail 
-                description="URL acortada o redireccionada"
-                url={finalUrl}
-            />
+                    description="URL escaneada"
+                    url={url}
+                />
+                
+            {
+                url === finalUrl ? 
+                    null
+                :
+                    <UrlDetail 
+                        description="URL acortada o redireccionada"
+                        url={finalUrl}
+                    />
+            }
+
             <EngineCounter 
                 maliciousScans={maliciousScans}
                 numberOfScans={totalScans}
@@ -68,14 +75,14 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 30,
         fontWeight: 800,
-        marginTop: 30,
+        marginTop: 25,
     },
 
     titleEngine: {
         color: '#fff',
         fontSize: 30,
         fontWeight: 800,
-        marginTop: 20,
+        marginTop: 5,
         marginLeft: -40
     },
 
