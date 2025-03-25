@@ -12,11 +12,11 @@ export const URLArray = [
     'steanmscommnuity.com',
     'https://micuenta-actualizacion.com/',
     'https://forms.office.com/r/fLKfYvxxni', // No detectado por VirusTotal
-    'https://beneficiosresgate.com/resgate/presell/?name=BENEDITO%2520DAMASCENO%2520DE%2520MIRANDA&document=04249194272&email=ditoenator@gmail.com&telephone=91984703108',
+    'https://beneficiosresgate.com/resgate/presell/?name=BENEDITO%2520DAMASCENO%2520DE%2520MIRANDA&document=04249194272&email=ditoenator@gmail.com&telephone=91984703108', // Maliciosa
     'https://aramexglobalexpress.com', // Suspicious
     'https://chat.atendimento24chatb.com/consultag8?nome=visitante', //Suspicious
     'https://sat.gob.mx-subastas.online/honda-crv-2017/', // No detectado por VirusTotal
-    'https://aumentoupgrade.s3.us-east-2.amazonaws.com/index.html',
+    'https://aumentoupgrade.s3.us-east-2.amazonaws.com/index.html', // Maliciosa
     'http://aventurascol.webcindario.com/',
     'https://httpsgggssupplemeentosoficial.shop/wpm@572a9d70wb1afbfdep8f1e6aabm30a09288/custom/web-pixel-shopify-custom-pixel@0411/sandbox/modern/',
 ]
