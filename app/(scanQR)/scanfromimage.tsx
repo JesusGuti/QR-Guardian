@@ -20,7 +20,7 @@ export default function ScanFromImage () {
         <View style={styles.container}>
             <BackButton route='../' />
             {isUrlShorten && <Text style={styles.shorten}>URL ACORTADA</Text>}
-            <Text style={styles.url}>{obtainedURL}</Text>
+            <Text style={styles.url} numberOfLines={4}>{obtainedURL}</Text>
             <Image source={{ uri: uri.toString() }} style={styles.image} />
             <ScanAlert 
                 scanStatus={scanData.scanStatus}
@@ -53,7 +53,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textDecorationLine: 'underline',
         position: 'absolute',
-        top: '20%'
+        top: '20%',
+        width: 350,
+        textAlign: 'center'
     },
 
     image: {

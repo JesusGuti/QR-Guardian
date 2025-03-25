@@ -45,30 +45,37 @@ export function useSearchParamsFromImage () {
         setScanData(scanAlertSchema.selected);
 
         setTimeout(async () => {
-            const urlAfterCheckHops = await checkIfThereAreHops(data);
+            try {
+                const urlAfterCheckHops = await checkIfThereAreHops(data);
             
-            if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
-                setObtainedURL(urlAfterCheckHops);
-                setIsUrlShorten(true);
+                if (!areOriginalUrlAndHoppedSimilar(data, urlAfterCheckHops)) {
+                    setObtainedURL(urlAfterCheckHops);
+                    setIsUrlShorten(true);
+                    setScanData({
+                        ...scanAlertSchema.shorten
+                    });
+                }        
+                
+                const urlID = await scanUrl(urlAfterCheckHops);
+                const results = await getUrlReportAnalysis(urlID);
+    
+                if (!isUrlSafe(results)) {
+                    router.replace({ pathname: "/(results)/dangerscreen", params: { url: data, results: JSON.stringify(results) } });
+                    return;
+                } 
+    
+                if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data)) {
+                    router.replace({ pathname: "/(results)/suspiciousscreen", params: { url: data, results: JSON.stringify(results) } });
+                    return;
+                }
+    
+                router.replace({ pathname: "/(results)/safescreen", params: { url: results.last_final_url } });
+            } catch (error) {
                 setScanData({
-                    ...scanAlertSchema.shorten
-                });
-            }        
-            
-            const urlID = await scanUrl(urlAfterCheckHops);
-            const results = await getUrlReportAnalysis(urlID);
-
-            if (!isUrlSafe(results)) {
-                router.replace({ pathname: "/(results)/dangerscreen", params: { url: data, results: JSON.stringify(results) } });
-                return;
-            } 
-
-            if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data)) {
-                router.replace({ pathname: "/(results)/suspiciousscreen", params: { url: data, results: JSON.stringify(results) } });
-                return;
+                    ...scanAlertSchema.failed
+                });      
+                console.error(error);
             }
-
-            router.replace({ pathname: "/(results)/safescreen", params: { url: results.last_final_url } });
         }, 1500);    
     }, [qrdata]);   
 
