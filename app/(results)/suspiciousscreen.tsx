@@ -1,67 +1,89 @@
+import AlertText from "@/components/ResultsComponents/AlertText";
+import Description from "@/components/ResultsComponents/Description";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 import suspiciousIcon from "@/assets/images/suspicious-icon.png"
 import { suspiciousGradient } from "@/constants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
-import { useLocalSearchParams } from "expo-router";
 import { 
     Image,
     StyleSheet, 
     Text, 
-    Linking 
+    View 
 } from "react-native";
+import { useShowSuspiciousDetails } from "@/hooks/useShowSuspiciousDetails";
+import IsSuspiciousCheckbox from "@/components/ResultsComponents/IsSuspiciousCheckbox";
 
 export default function SuspiciousScreen () {   
-    const { url } = useLocalSearchParams();
-    
-        const handlePress = () => {
-            Linking.openURL(url.toString()).catch(err => console.error("Ocurrio un error al abrir el enlace", err));
-        }
-        
-        return (
-            <ResultBackground
-                colors={suspiciousGradient.colors}
-                locations={suspiciousGradient.locations}
-                showButton={true}
-            >
-                <Image source={suspiciousIcon} style={styles.suspiciousIcon} />
-                <Text style={styles.alertText}>C&oacute;digo QR sospechoso</Text>
-                <Text style={styles.description}>El c&oacute;digo QR escaneado puede ser un caso de quishing. ¡Tenga Cuidado!</Text>
+    const { 
+        url, 
+        handlePress,
+        isDomainChecked,
+        isTLDChecked 
+    } = useShowSuspiciousDetails();
 
-                <ResultButton 
-                    handlePress={handlePress}
-                    buttonText="Acceder a enlace"
-                    buttonStyle={""}
-                    textStyle={styles.buttonText}
-                />
-            </ResultBackground>      
-        );
+    return (
+        <ResultBackground
+            colors={suspiciousGradient.colors}
+            locations={suspiciousGradient.locations}
+            showButton={true}
+        >
+            <Image source={suspiciousIcon} style={styles.suspiciousIcon} />
+            <AlertText text={"Código QR sospechoso"} />
+            <Description text={"El código QR escaneado puede ser un caso de quishing."} />
+            <Text style={styles.alert}>¡Tenga Cuidado!</Text>
+
+            <View style={styles.urlContainer}>
+                <AlertText text={"URL escaneada:"} />
+                <Text style={styles.url}>{url}</Text>
+            </View>
+
+            <IsSuspiciousCheckbox text={"¿TLD sospechoso?"} checked={isDomainChecked} />
+            <IsSuspiciousCheckbox text={"¿Dominio sospechoso?"} checked={isTLDChecked} />
+            <ResultButton 
+                handlePress={handlePress}
+                buttonText="Acceder a enlace"
+                buttonStyle={styles.button}
+                textStyle={styles.buttonText}
+            />
+        </ResultBackground>      
+    );
 }
 
 const styles = StyleSheet.create({
     suspiciousIcon: {
         width: 192, 
         height: 192,
-        marginTop: 100,
+        marginTop: 50,
         marginBottom: 20
 
     },
 
-    alertText: {
-        color: '#fff',
-        fontSize: 20,
-        fontWeight: 800,
-        marginBottom: 10
-    },
-
-    description: {
-        width: 300,
-        fontSize: 16,
+    alert: {
+        fontSize: 22,
         color: '#fff',
         textAlign: 'center',
-        marginBottom: 30
+        fontWeight: 800,
+        marginTop: -15,
+        marginBottom: 20
+    },
+
+    urlContainer: {
+        width: 400,
+        alignItems: 'center',
+        marginBottom: 20,
+        textAlign: 'center'
+    },
+
+    url: {
+        color: '#fff',
+        fontSize: 18,
+    },
+
+    button: {
+        marginTop: 30
     },
 
     buttonText: {
-        color: 'rgba(255, 138, 128, 1)',
-    }
+        color: 'rgb(255, 213, 0)',
+    },
 });

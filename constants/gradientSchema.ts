@@ -19,6 +19,6 @@ export const safeGradient = {
 };
 
 export const suspiciousGradient = {
-    colors: ['rgb(236, 220, 42)', 'rgba(219, 221, 79, 0.4)'] as const,
-    locations: [0.72, 1] as const 
+    colors: ['#FAB10B', 'rgba(219, 221, 79, 0.4)'] as const,
+    locations: [0.50, 1] as const 
 };
