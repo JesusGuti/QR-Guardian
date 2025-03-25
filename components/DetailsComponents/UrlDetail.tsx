@@ -14,7 +14,7 @@ export default function UrlDetail ({ description, url }: Props) {
     return (
         <View style={styles.detail}>
             <Text style={styles.description}>{description}</Text>
-            <Text style={styles.url}>{url}</Text>
+            <Text style={styles.url} numberOfLines={3}>{url}</Text>
         </View>
     );
 }
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         width: 350,
         display: 'flex',
         gap: 5,
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 30,
         padding: 5,
     },
