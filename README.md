@@ -1,4 +1,4 @@
-<div style="text-align: center;">
+<div style="display: flex; justify-content:center; margin-bottom: 20px;">
   <img src="assets/readme/QRGuardian-Logo.png" alt="Logo">
 </div>
 
@@ -14,7 +14,7 @@ QrGuardian es un prototipo de aplicación para la detección de ataques relacion
 
 ## Stack de Tecnología usada
 Se desarrollo el proyecto usando las siguientes tecnologias
-<div style="display: flex; flex-direction:row; text-align: center; gap: 30px; justify-content: center;">
+<div style="display: flex; flex-direction:row; gap: 30px; justify-content: center;">
   <img src="assets/readme/expo.webp" alt="Expo PNG" width="100" height="100">
   <img src="assets/readme/react-native.png" alt="Expo PNG" width="80" height="100">
   <img src="assets/readme/node.png" alt="Node" width="150" height="100">
