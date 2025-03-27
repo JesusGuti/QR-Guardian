@@ -89,9 +89,16 @@ export async function getUrlReportAnalysis (id: string): Promise<VirusTotalAnaly
 
 export function isUrlSafe (analysis: VirusTotalAnalysis): boolean {
     const maliciousScansCount = analysis.last_analysis_stats.malicious;
-    const suspiciousScansCount = analysis.last_analysis_stats.suspicious;
 
-    if (maliciousScansCount > 0 || suspiciousScansCount > 0) return false;
+    if (maliciousScansCount > 0) return false;
 
     return true;
+}
+
+export function isUrlSuspicious (analysis: VirusTotalAnalysis): boolean {
+    const suspiciousScansCount = analysis.last_analysis_stats.suspicious;
+
+    if (suspiciousScansCount > 0) return true;
+
+    return false;
 }

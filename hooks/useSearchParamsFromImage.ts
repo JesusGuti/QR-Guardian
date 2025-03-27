@@ -16,7 +16,8 @@ import {
 import {
     isUrlSafe,
     getUrlReportAnalysis,
-    scanUrl
+    scanUrl,
+    isUrlSuspicious
 } from "@/services/getUrlReport";
 
 export function useSearchParamsFromImage () {
@@ -64,7 +65,7 @@ export function useSearchParamsFromImage () {
                     return;
                 } 
     
-                if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data)) {
+                if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data) || isUrlSuspicious(results)) {
                     router.replace({ pathname: "/(results)/suspiciousscreen", params: { url: data, results: JSON.stringify(results) } });
                     return;
                 }

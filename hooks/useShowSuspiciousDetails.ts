@@ -1,12 +1,38 @@
 import { Linking } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { VirusTotalAnalysis } from "@/interfaces/VirusTotalAnalysis";
+import { 
+    useState,
+    useEffect
+} from "react";
+import { 
+    checkIfTLDIsRare,
+    checkIfDomainIsSuspicious 
+} from "@/services/checkUrl";
 
 export function useShowSuspiciousDetails() {
-    const { url } = useLocalSearchParams();
+    const { url, results } = useLocalSearchParams();
     const [isTLDChecked, setIsTLDChecked] = useState(false);
-    const [isDomainChecked, setIsDomainChecked] = useState(true);
+    const [isDomainChecked, setIsDomainChecked] = useState(false);
+    const [isScannedChecked, setIsScannedChecked] = useState(false);
  
+    useEffect(() => {
+        if (url && typeof url === 'string') {
+            const TLDSuspicious = checkIfTLDIsRare(url);
+            const domainSuspicious = checkIfDomainIsSuspicious(url);
+            setIsTLDChecked(TLDSuspicious);
+            setIsDomainChecked(domainSuspicious);
+        }
+
+        if (results && typeof results === 'string') {
+            const parsedResults: VirusTotalAnalysis = JSON.parse(results);
+            const numberOfSuspiciousScans = parsedResults.last_analysis_stats.suspicious;
+            if (numberOfSuspiciousScans > 0 || !isDomainChecked || !isTLDChecked) {
+                setIsScannedChecked(true) 
+            }
+        }
+    }, [url, results]);
+
     const handlePress = () => {
         Linking.openURL(url.toString()).catch(err => console.error("Ocurrio un error al abrir el enlace", err));
     }
@@ -16,7 +42,9 @@ export function useShowSuspiciousDetails() {
         handlePress,
         isTLDChecked,
         isDomainChecked,
+        isScannedChecked,
         setIsDomainChecked,
-        setIsTLDChecked
+        setIsTLDChecked,
+        setIsScannedChecked
     }
 }
