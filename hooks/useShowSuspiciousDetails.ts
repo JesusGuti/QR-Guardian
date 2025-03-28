@@ -17,17 +17,15 @@ export function useShowSuspiciousDetails() {
     const [isScannedChecked, setIsScannedChecked] = useState(false);
  
     useEffect(() => {
-        if (url && typeof url === 'string') {
+        if ((url && typeof url === 'string') && (results && typeof results === 'string')) {
             const TLDSuspicious = checkIfTLDIsRare(url);
             const domainSuspicious = checkIfDomainIsSuspicious(url);
             setIsTLDChecked(TLDSuspicious);
             setIsDomainChecked(domainSuspicious);
-        }
 
-        if (results && typeof results === 'string') {
             const parsedResults: VirusTotalAnalysis = JSON.parse(results);
             const numberOfSuspiciousScans = parsedResults.last_analysis_stats.suspicious;
-            if (numberOfSuspiciousScans > 0 || !isDomainChecked || !isTLDChecked) {
+            if (numberOfSuspiciousScans > 0 || (!TLDSuspicious && !domainSuspicious)) {
                 setIsScannedChecked(true) 
             }
         }
