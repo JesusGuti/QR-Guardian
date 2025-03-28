@@ -26,7 +26,7 @@ export default function IsSuspiciousCheckbox ({ text, checked }: Props) {
 
 const styles = StyleSheet.create({
     container: {
-        width: 280,
+        width: 300,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     checkbox: {
         width: 25,
         height: 25,
-        borderRadius: 5
+        borderRadius: 5,
     }
 });

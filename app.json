@@ -2,7 +2,7 @@
   "expo": {
     "name": "QRGuardian",
     "slug": "QRGuardian",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -20,7 +20,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.anonymous.QRGuardian"
+      "package": "com.JAGG.QRGuardian"
     },
     "web": {
       "bundler": "metro",

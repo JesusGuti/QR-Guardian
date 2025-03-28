@@ -18,7 +18,8 @@ export default function SuspiciousScreen () {
         url, 
         handlePress,
         isDomainChecked,
-        isTLDChecked 
+        isTLDChecked,
+        isScannedChecked
     } = useShowSuspiciousDetails();
 
     const highlightSuspiciousPart = () => {
@@ -61,6 +62,7 @@ export default function SuspiciousScreen () {
 
             <IsSuspiciousCheckbox text={"¿TLD sospechoso?"} checked={isDomainChecked} />
             <IsSuspiciousCheckbox text={"¿Dominio sospechoso?"} checked={isTLDChecked} />
+            <IsSuspiciousCheckbox text={"¿Detectado por algún motor?"} checked={isScannedChecked} />
             <ResultButton 
                 handlePress={handlePress}
                 buttonText="Acceder a enlace"

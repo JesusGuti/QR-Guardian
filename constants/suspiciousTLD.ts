@@ -79,5 +79,6 @@ export const suspiciousTLD: string[] = [
     "to",
     "tv",
     "ws",
-    "skin"
+    "skin",
+    "lol"
 ];

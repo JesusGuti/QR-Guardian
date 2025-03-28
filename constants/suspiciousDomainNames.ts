@@ -1,5 +1,5 @@
 export const suspiciousDomainNames = [
-    "000webhostapp.com",
+    "000webhostapp",
     "forms",
     "chat",
     "subastas",

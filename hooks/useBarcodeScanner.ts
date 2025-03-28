@@ -18,7 +18,8 @@ import {
 import {
     isUrlSafe,
     getUrlReportAnalysis,
-    scanUrl
+    scanUrl,
+    isUrlSuspicious
 } from "@/services/getUrlReport";
 
 export function useBarcodeScanner () {
@@ -68,7 +69,7 @@ export function useBarcodeScanner () {
                     return;
                 } 
 
-                if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data)) {
+                if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data) || isUrlSuspicious(results)) {
                     setHasRedirected(true);
                     router.replace({ pathname: "/(results)/suspiciousscreen", params: { url: data, results: JSON.stringify(results) } });
                     return;
