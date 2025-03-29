@@ -60,8 +60,8 @@ export default function SuspiciousScreen () {
                 <Text style={styles.url}>{highlightSuspiciousPart()}</Text>
             </View>
 
-            <IsSuspiciousCheckbox text={"¿TLD sospechoso?"} checked={isDomainChecked} />
-            <IsSuspiciousCheckbox text={"¿Dominio sospechoso?"} checked={isTLDChecked} />
+            <IsSuspiciousCheckbox text={"¿TLD sospechoso?"} checked={isTLDChecked} />
+            <IsSuspiciousCheckbox text={"¿Dominio sospechoso?"} checked={isDomainChecked} />
             <IsSuspiciousCheckbox text={"¿Detectado por algún motor?"} checked={isScannedChecked} />
             <ResultButton 
                 handlePress={handlePress}

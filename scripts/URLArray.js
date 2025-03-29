@@ -1,12 +1,32 @@
 export const URLArray = [
     'https://sat.gob.mx-subastas.online/honda-crv-2017/',
+    'https://cache.netflix.com.sg1.workers2.xyz',
+    'https://tinyurl.com/bievenidosmuchachos',
+    'http://101.173.169.186',
+    'https://ameazon-equency.missmichelle.net/apsigninopenid/',
+    'https://estasfeta.life/',
+    'https://ezdrive.sqjll.vip/',
+    'https://asset-mantra.com',
+    'https://shorturl.at/H7M6g',
+    'https://tinyurl.com/suplements-arnold',
+    'https://epicpromotions.com/Hetzner/hetzner/web/login.php',
+    'https://bit.ly/4j9mydD',
+    'http://atmbolivia.com/',
+    'https://shorturl.at/xrAlf',
+    'https://shorturl.at/TNlQm',
+    'https://shorturl.at/KkN3U',
+    'https://shorturl.at/dT9aG',
+    'https://shorturl.at/NeBp6',
+    'https://shorturl.at/x3shz',
+    'https://shorturl.at/fRDz4',
+    'https://shorturl.at/R3oRy'
 ]
 
-const otherURLs = [
+export const otherURLs = [
 
 ]
 
-const checkedURLs = [
+export const checkedURLs = [
     'https://tinyurl.com/f4ceb0okk', // ACORTADA - CAIDO
     'https://tinyurl.com/fcyt-admision', // ACORTADA - SEGURO
     'http://posgradovirtual.fcyt.umss.edu.bo/', // SEGURO

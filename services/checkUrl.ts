@@ -1,5 +1,6 @@
 import { suspiciousTLD } from "@/constants/suspiciousTLD";
 import { suspiciousDomainNames } from "@/constants/suspiciousDomainNames";
+import { shortenURLDomains } from "@/constants/shortenURLDomains";
 
 export function checkIfIsValidURL (data: string) : boolean {
     try {
@@ -11,10 +12,21 @@ export function checkIfIsValidURL (data: string) : boolean {
     }
 }
 
+function domainIsAServiceToShortenURL (url:string) {
+    const urlObject = new URL(url);
+    const hostname = urlObject.hostname;
+    const isHostnameShortenURL = shortenURLDomains.some((domain) => hostname.includes(domain));
+    console.log(hostname)
+    console.log(isHostnameShortenURL)
+    return isHostnameShortenURL;
+}
+
 /*  
     Number of hops indicates how many redirections have been realized from the start URL 
 */
 export async function checkIfThereAreHops (url: string): Promise<string> {
+    if (!domainIsAServiceToShortenURL(url)) return url;
+
     try {
         let currentUrl = url;
 
@@ -78,10 +90,9 @@ export function checkIfDomainIsSuspicious (url: string): boolean {
     try {
         const urlObject = new URL(url);
         const hostname = urlObject.hostname;
-        const parts = hostname.split('.');
-        const checkDomain = parts.map(part => suspiciousDomainNames.includes(part));
+        const checkDomain = suspiciousDomainNames.some((domain) => hostname.includes(domain))
 
-        return checkDomain.includes(true);
+        return checkDomain;
     } catch (error) {
         throw new Error(`Ocurrio un error al obtener el dominio ${error}`);
     }
