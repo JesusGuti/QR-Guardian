@@ -1,7 +1,7 @@
 import { 
+    areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL,
-    areOriginalUrlAndHoppedSimilar
 } from "@/services/checkUrl";
 
 test("Given an URL that starts with https:// it should be a valid URL", () => {

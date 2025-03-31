@@ -11,5 +11,11 @@ export const suspiciousDomainNames = [
     "crypt",
     "oferta",
     "pay",
-    "gcocgle"    
+    "disscussion",
+    "wallet",
+    "chatbot",
+    "claim",
+    "coinsub",
+    "usual",
+    
 ]

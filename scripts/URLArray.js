@@ -1,4 +1,10 @@
 export const URLArray = [
+    'https://shorturl.at/WLd6R',
+    'https://shorturl.at/9j0pl',
+    'https://shorturl.at/8smfN'
+]
+
+export const fallenURLs = [
     'https://sat.gob.mx-subastas.online/honda-crv-2017/',
     'https://cache.netflix.com.sg1.workers2.xyz',
     'https://tinyurl.com/bievenidosmuchachos',
@@ -20,10 +26,6 @@ export const URLArray = [
     'https://shorturl.at/x3shz',
     'https://shorturl.at/fRDz4',
     'https://shorturl.at/R3oRy'
-]
-
-export const otherURLs = [
-
 ]
 
 export const checkedURLs = [

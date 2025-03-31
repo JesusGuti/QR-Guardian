@@ -25,7 +25,7 @@ export const suspiciousTLD: string[] = [
     "one",
     "pro",
     "red",
-    "win",
+    "in",
     "zone",
     "buzz",
     "cool",
@@ -60,7 +60,7 @@ export const suspiciousTLD: string[] = [
     "faith",
     "bid",
     "loan",
-    "men",
+    "me",
     "date",
     "wang",
     "xin",
@@ -80,5 +80,7 @@ export const suspiciousTLD: string[] = [
     "tv",
     "ws",
     "skin",
-    "lol"
+    "lol",
+    "cfd",
+    "chat"
 ];

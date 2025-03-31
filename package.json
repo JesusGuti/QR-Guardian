@@ -23,6 +23,7 @@
     "expo-blur": "~14.0.3",
     "expo-build-properties": "~0.13.2",
     "expo-camera": "~16.0.18",
+    "expo-checkbox": "~4.0.1",
     "expo-constants": "~17.0.6",
     "expo-document-picker": "~13.0.3",
     "expo-font": "~13.0.3",
@@ -36,6 +37,7 @@
     "expo-symbols": "~0.2.2",
     "expo-system-ui": "~4.0.8",
     "expo-web-browser": "~14.0.2",
+    "fastest-levenshtein": "^1.0.16",
     "just-throttle": "^4.2.0",
     "qrcode": "^1.5.4",
     "react": "18.3.1",
@@ -47,8 +49,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
-    "react-native-webview": "13.12.5",
-    "expo-checkbox": "~4.0.1"
+    "react-native-webview": "13.12.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
