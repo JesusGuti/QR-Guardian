@@ -1,12 +1,13 @@
 // This array contains typical domain names 
 export const domainNames = [
+    "apple",
     "google",
     "netflix",
     "spotify",
     "youtube",
-    "steam",
+    "steampowered",
+    "steamcommunity",
     "whatsapp",
-    "apple",
     "facebook",
     "instagram",
     "twitter",
@@ -33,9 +34,7 @@ export const domainNames = [
     "roblox",
     "universal",
     "universalx",
-    "community",
     "samsung",
     "discord",
     "yahoo",
-    
 ]

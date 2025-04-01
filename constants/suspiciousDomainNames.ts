@@ -17,5 +17,5 @@ export const suspiciousDomainNames = [
     "claim",
     "coinsub",
     "usual",
-    
+    "instagramfacebook"
 ]

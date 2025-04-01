@@ -82,5 +82,6 @@ export const suspiciousTLD: string[] = [
     "skin",
     "lol",
     "cfd",
-    "chat"
+    "chat",
+    "cc"
 ];

@@ -1,7 +1,10 @@
 export const URLArray = [
-    'https://shorturl.at/WLd6R',
-    'https://shorturl.at/9j0pl',
-    'https://shorturl.at/8smfN'
+    'https://ameazon-equency.missmichelle.net/apsigninopenid/',
+    'https://steanmscommnuity.com',
+    'https://cache.netflix.com.sg1.workers2.xyz',
+    'https://capuchino-scesi.web.app/',
+    'https://atlus.com/',
+    'https://store.steampowered.com/games/?l=spanish',
 ]
 
 export const fallenURLs = [
