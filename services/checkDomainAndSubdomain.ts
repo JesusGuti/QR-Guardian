@@ -81,9 +81,6 @@ export function checkIfSubdomainPartsAreTyposquatting (url: string): boolean {
             const partClosestWord = partWords.map((word) => {
                 const closestDomain = closest(word, domainNames);
                 let distanceValue = distance(closestDomain, word);
-                console.log(word)
-                console.log(closestDomain)
-                console.log(distanceValue)
                 const maxAllowedDistance = setMaximumDistance(word);
 
                 if (distanceValue > maxAllowedDistance) {
@@ -102,8 +99,6 @@ export function checkIfSubdomainPartsAreTyposquatting (url: string): boolean {
 
             return partClosestWord;
         })
-
-        console.log(closestWords)
 
         const closestWordsFiltered = closestWords.flat().filter((word) => word.distanceValue >= MIN_DISTANCE && word.distanceValue <= word.maxAllowedDistance )    
 
@@ -154,7 +149,6 @@ export function isDomainAServiceToShortenURL (url:string) {
     This function searches in the domain the closest word and if the distance reduces it returns the new distance.
 */
 function searchClosestInWord (domain: string, closestString: string, previousDistance: number): number {
-    console.log(closestString)
     let actualDistance = previousDistance;
     let actualWord = closestString;
     const splittedDomain = domain.split('')
@@ -172,8 +166,6 @@ function searchClosestInWord (domain: string, closestString: string, previousDis
             if (newDistance < actualDistance &&  doesClosestSharesAtLeastHalfCharactersWithDomain(composedWord, closestString)) {
                 actualDistance = newDistance;
                 actualWord = composedWord;
-                console.log("actualDistance", actualDistance)
-                console.log("actualWord", actualWord)
             }
         }
     }
