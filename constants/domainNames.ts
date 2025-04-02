@@ -37,4 +37,5 @@ export const domainNames = [
     "samsung",
     "discord",
     "yahoo",
+    "dhl"
 ]

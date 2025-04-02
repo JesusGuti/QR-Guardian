@@ -11,7 +11,6 @@ import {
     nonTyposquattedURLs
 } from "./test_services_data/typosquattedURLs";
 
-
 test("Given an URL that contains a suspicious word in the URL it should return true", () => {
     const url = 'https://chat.atendimento24chatb.com/consultag8?nome=visitante';
     expect(checkIfDomainIsSuspicious(url)).toBe(true);
@@ -74,5 +73,5 @@ test("Given an array of non typosquatted URLs all of them should return false ",
     nonTyposquattedURLs.forEach((url) => {
         expect(checkIfDomainIsTyposquatting(url)).toBe(false);
         expect(checkIfSubdomainPartsAreTyposquatting(url)).toBe(false);
-    })
-})
+    });
+});

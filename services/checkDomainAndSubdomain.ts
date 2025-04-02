@@ -9,9 +9,7 @@ import {
 } from "fastest-levenshtein";
 
 const MIN_DISTANCE = 1;
-const LOWER_MAX_DISTANCE = 2;
-const MIDDLE_MAX_DISTANCE = 2;
-const UPPER_MAX_DISTANCE = 4;
+const UPPER_MAX_DISTANCE = 10;
 const regex = /[\W_]+/;
 
 export function checkIfDomainIsSuspicious (url: string): boolean {
@@ -35,20 +33,31 @@ export function checkIfDomainIsTyposquatting (url: string): boolean {
         if (parts.length < 2) return false
 
         const domain = parts[parts.length - 2];
-        const closestDomain = closest(domain, domainNames);
-        const distanceToClosestDomain = distance(domain, closestDomain);
+        // Dividing the domain into parts if there is a non alphanumeric character
+        const domainParts = domain.split(regex);
 
-        // No difference between domain and closest
-        if (distanceToClosestDomain === 0) return false;
+        const closestWords: ClosestWord[] = domainParts.map((word) => {
+            const closestDomain = closest(word, domainNames);
+            let distanceValue = distance(closestDomain, word);
+            const maxAllowedDistance = setMaximumDistance(word);
 
-        // Typosquatting detected
-        const MAX_DISTANCE = setMaximumDistance(domain);
-        if (distanceToClosestDomain >= MIN_DISTANCE && distanceToClosestDomain <= MAX_DISTANCE) return true;
+            if (distanceValue > maxAllowedDistance) {
+                distanceValue = searchClosestInWord(word, closestDomain, distanceValue);
+            }
 
-        // In case a domain is a large word, probably the word typosquatted is embedded. Example: steanmscommnuity, 
-        const isReallyClosestInWord = searchClosestInWord(domain, closestDomain, distanceToClosestDomain);
+            const newClosestWord: ClosestWord = { 
+                domain: word, 
+                closestDomain, 
+                distanceValue, 
+                maxAllowedDistance 
+            };
 
-        if (isReallyClosestInWord >= MIN_DISTANCE && isReallyClosestInWord <= MAX_DISTANCE) return true;
+            return newClosestWord;
+        })
+
+        const filteredClosestWords = closestWords.flat().filter(({ distanceValue, maxAllowedDistance }) => distanceValue >= MIN_DISTANCE && distanceValue <= maxAllowedDistance )    
+
+        if (filteredClosestWords.length > 0) return true
 
        return false;
     } catch (error) {
@@ -65,17 +74,24 @@ export function checkIfSubdomainPartsAreTyposquatting (url: string): boolean {
         if (parts.length <= 2) return false
  
         // Obtaining subdomain parts
-        const subdomain = parts.slice(0, parts.length - 1);
+        const subdomain = parts.slice(0, parts.length - 2);
         const closestWords: ClosestWord[][] = subdomain.map((part) => {
             const partWords = part.split(regex);
 
             const partClosestWord = partWords.map((word) => {
                 const closestDomain = closest(word, domainNames);
-                const distanceValue = distance(word, closestDomain);
+                let distanceValue = distance(closestDomain, word);
+                console.log(word)
+                console.log(closestDomain)
+                console.log(distanceValue)
                 const maxAllowedDistance = setMaximumDistance(word);
 
+                if (distanceValue > maxAllowedDistance) {
+                    distanceValue = searchClosestInWord(word, closestDomain, distanceValue);
+                }
+
                 const newClosestWord: ClosestWord = { 
-                    part, 
+                    domain: word, 
                     closestDomain, 
                     distanceValue, 
                     maxAllowedDistance 
@@ -87,10 +103,9 @@ export function checkIfSubdomainPartsAreTyposquatting (url: string): boolean {
             return partClosestWord;
         })
 
-        const closestWordsFiltered = closestWords.flat().map((word) => {
-            const newDistance = searchClosestInWord(word.part, word.closestDomain, word.distanceValue);
-            return { distanceValue: newDistance, maxAllowedDistance: word.maxAllowedDistance };
-        }).filter(({ distanceValue, maxAllowedDistance }) => distanceValue >= MIN_DISTANCE && distanceValue <= maxAllowedDistance )    
+        console.log(closestWords)
+
+        const closestWordsFiltered = closestWords.flat().filter((word) => word.distanceValue >= MIN_DISTANCE && word.distanceValue <= word.maxAllowedDistance )    
 
         if (closestWordsFiltered.length > 0) return true
 
@@ -114,6 +129,19 @@ export function checkIfTLDIsRare (url: string): boolean {
     } 
 }
 
+function doesClosestSharesAtLeastHalfCharactersWithDomain (closest: string, domain: string): boolean {
+    let counter = 0;
+    for (let i = 0; i < closest.length; i++) {
+        if (closest[i] && domain[i] && closest[i] === domain[i]) {
+            counter++;;
+        }
+    }
+
+    if (counter > Math.round(closest.length / 2)) return true;
+
+    return false;
+}
+
 export function isDomainAServiceToShortenURL (url:string) {
     const urlObject = new URL(url);
     const hostname = urlObject.hostname;
@@ -125,20 +153,27 @@ export function isDomainAServiceToShortenURL (url:string) {
 /* 
     This function searches in the domain the closest word and if the distance reduces it returns the new distance.
 */
-function searchClosestInWord (domain: string, closestString: string, previousDistance: number):number {
+function searchClosestInWord (domain: string, closestString: string, previousDistance: number): number {
+    console.log(closestString)
     let actualDistance = previousDistance;
+    let actualWord = closestString;
     const splittedDomain = domain.split('')
     
     for(let i = 0; i <= domain.length; i++) {
         for (let j = i; j <= domain.length; j++) {
-            const composedWord = splittedDomain.slice(i, j).join('')
+            const composedWord = splittedDomain.slice(i, j).join('');
             
             if (composedWord.length < closestString.length) continue;
 
-            const newDistance = distance(composedWord, closestString)
+            const newDistance = distance(closestString, composedWord);
 
-            if (newDistance !== 0 && newDistance < actualDistance) {
-                actualDistance = newDistance
+            if (newDistance === 0 || newDistance >= actualDistance) continue;
+                
+            if (newDistance < actualDistance &&  doesClosestSharesAtLeastHalfCharactersWithDomain(composedWord, closestString)) {
+                actualDistance = newDistance;
+                actualWord = composedWord;
+                console.log("actualDistance", actualDistance)
+                console.log("actualWord", actualWord)
             }
         }
     }
@@ -149,8 +184,7 @@ function searchClosestInWord (domain: string, closestString: string, previousDis
 function setMaximumDistance (domain: string): number {
     const domainLength = domain.length;
     
-    if (domainLength <= 5) return LOWER_MAX_DISTANCE;
-    if (domainLength <= 10) return MIDDLE_MAX_DISTANCE;
+    if (domainLength < 20) return Math.floor(domainLength / 2);
 
     return UPPER_MAX_DISTANCE;
 }

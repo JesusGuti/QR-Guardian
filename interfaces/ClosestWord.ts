@@ -1,5 +1,5 @@
 export interface ClosestWord {
-    part: string;
+    domain: string;
     closestDomain: string;
     distanceValue: number;
     maxAllowedDistance: number;

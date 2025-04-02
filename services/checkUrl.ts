@@ -5,7 +5,7 @@ export function checkIfIsValidURL (data: string) : boolean {
         new URL(data);
         return true;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return false;
     }
 }

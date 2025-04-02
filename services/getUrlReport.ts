@@ -52,11 +52,19 @@ export async function scanUrl (url: string): Promise<string> {
     This function sends the id obtained by scanning the URL to obtain the result
 */
 export async function getUrlReportAnalysis (id: string): Promise<VirusTotalAnalysis> {
+    if (id === "") {
+        throw new Error("Error el ID no puede ser vacio.");
+    }
+
+    if (!apiKey) {
+        throw new Error("Error con las credenciales de acceso.");
+    }
+
     const analysisOptions = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            'x-apikey': 'a55854648c4a37c6103ffc8e484698aa58d4661212c23c9f716ebdca0209bd91'
+            'x-apikey': apiKey
         }
     };
     
