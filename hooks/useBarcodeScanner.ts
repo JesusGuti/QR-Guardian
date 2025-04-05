@@ -12,9 +12,11 @@ import {
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL,
-    checkIfTLDIsRare,
-    checkIfDomainIsSuspicious
 } from "@/services/checkUrl";
+import {
+    checkIfDomainIsSuspicious,
+    checkIfTLDIsRare
+} from "@/services/checkDomainAndSubdomain"
 import {
     isUrlSafe,
     getUrlReportAnalysis,

@@ -1,4 +1,13 @@
 export const URLArray = [
+    'https://ameazon-equency.missmichelle.net/apsigninopenid/',
+    'https://steanmscommnuity.com',
+    'https://cache.netflix.com.sg1.workers2.xyz',
+    'https://capuchino-scesi.web.app/',
+    'https://atlus.com/',
+    'https://store.steampowered.com/games/?l=spanish',
+]
+
+export const fallenURLs = [
     'https://sat.gob.mx-subastas.online/honda-crv-2017/',
     'https://cache.netflix.com.sg1.workers2.xyz',
     'https://tinyurl.com/bievenidosmuchachos',
@@ -20,10 +29,6 @@ export const URLArray = [
     'https://shorturl.at/x3shz',
     'https://shorturl.at/fRDz4',
     'https://shorturl.at/R3oRy'
-]
-
-export const otherURLs = [
-
 ]
 
 export const checkedURLs = [

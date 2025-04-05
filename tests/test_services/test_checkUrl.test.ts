@@ -1,7 +1,7 @@
 import { 
+    areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL,
-    areOriginalUrlAndHoppedSimilar
 } from "@/services/checkUrl";
 
 test("Given an URL that starts with https:// it should be a valid URL", () => {
@@ -12,7 +12,7 @@ test("Given an URL that starts with http:// it should be a valid URL", () => {
     expect(checkIfIsValidURL("http://commons.wikimedia.org")).toBe(true);
 });
 
-test("Given an URL that doesn't follow the structure it is not a valid URL", () => {
+test("Given an text that doesn't follow the structure of a URL it should throw an error", () => {
     expect(checkIfIsValidURL("www.ejemplo.com")).toBe(false);
 });
 

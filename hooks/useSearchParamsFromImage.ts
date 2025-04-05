@@ -10,9 +10,11 @@ import {
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL,
+} from "@/services/checkUrl";
+import {
     checkIfDomainIsSuspicious,
     checkIfTLDIsRare
-} from "@/services/checkUrl";
+} from "@/services/checkDomainAndSubdomain";
 import {
     isUrlSafe,
     getUrlReportAnalysis,

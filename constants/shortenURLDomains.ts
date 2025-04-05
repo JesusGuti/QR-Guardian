@@ -38,7 +38,6 @@ export const shortenURLDomains = [
     'tny.im',
     'short.io',
     'cutt.us',
-    'short.cm',
     'v.ht',
     'kutt.it',
     'shrtco.de',
@@ -52,7 +51,4 @@ export const shortenURLDomains = [
     'lnk.to',
     'lnk.bio',
     'plink.to',
-    'short.cm',
-    'short.cm',
-    'short.cm',
 ];
