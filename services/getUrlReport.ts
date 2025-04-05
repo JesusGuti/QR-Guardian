@@ -43,7 +43,7 @@ export async function scanUrl (url: string): Promise<string> {
         if (error instanceof Error) {
             throw new Error(`Error en la solicitud: ${error?.message}`);
         } else {
-            throw new Error("Ocurrio un erroor desconocido en la solicitud");
+            throw new Error("Ocurrió un error desconocido en la solicitud");
         }
     }
 }

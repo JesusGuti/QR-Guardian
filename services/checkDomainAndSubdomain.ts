@@ -150,7 +150,6 @@ export function isDomainAServiceToShortenURL (url:string) {
 */
 function searchClosestInWord (domain: string, closestString: string, previousDistance: number): number {
     let actualDistance = previousDistance;
-    let actualWord = closestString;
     const splittedDomain = domain.split('')
     
     for(let i = 0; i <= domain.length; i++) {
@@ -165,7 +164,6 @@ function searchClosestInWord (domain: string, closestString: string, previousDis
                 
             if (newDistance < actualDistance &&  doesClosestSharesAtLeastHalfCharactersWithDomain(composedWord, closestString)) {
                 actualDistance = newDistance;
-                actualWord = composedWord;
             }
         }
     }

@@ -33,7 +33,6 @@ export const domainNames = [
     "binance",
     "roblox",
     "universal",
-    "universalx",
     "samsung",
     "discord",
     "yahoo",
