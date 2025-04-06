@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-**Describe el BUG**
+**Descripción del BUG**
 Una descripción clara y concisa de que trata el BUG
 
 **Como reproducir el BUG**
