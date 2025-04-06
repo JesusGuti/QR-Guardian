@@ -8,15 +8,15 @@ import {
     useState,
     useContext 
 } from "react";
+import {
+    checkIfDomainIsSuspicious,
+    checkIfTLDIsRare
+} from "@/services/URLServices/checkDomainAndSubdomain"
 import { 
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL,
 } from "@/services/URLServices/checkUrl";
-import {
-    checkIfDomainIsSuspicious,
-    checkIfTLDIsRare
-} from "@/services/URLServices/checkDomainAndSubdomain"
 import {
     isUrlSafe,
     getUrlReportAnalysis,
