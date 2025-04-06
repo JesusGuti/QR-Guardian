@@ -4,7 +4,7 @@ import {
     checkIfSubdomainPartsAreTyposquatting,
     checkIfTLDIsRare,
     isDomainAServiceToShortenURL
-} from "@/services/checkDomainAndSubdomain";
+} from "@/services/URLServices/checkDomainAndSubdomain";
 import {
     typosquattedURLs,
     typosquattedInSubdomainURLs,

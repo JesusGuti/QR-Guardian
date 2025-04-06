@@ -1,8 +1,5 @@
 import { ClosestWord } from "@/interfaces/ClosestWord";
 import { domainNames } from "@/constants/URLConstants/domainNames";
-import { suspiciousDomainNames } from "@/constants/URLConstants/suspiciousDomainNames";
-import { suspiciousTLD } from "@/constants/URLConstants/suspiciousTLD";
-import { shortenURLDomains } from "@/constants/URLConstants/shortenURLDomains";
 import {
     distance,
     closest
@@ -11,18 +8,6 @@ import {
 const MIN_DISTANCE = 1;
 const UPPER_MAX_DISTANCE = 10;
 const regex = /[\W_]+/;
-
-export function checkIfDomainIsSuspicious (url: string): boolean {
-    try {
-        const urlObject = new URL(url);
-        const hostname = urlObject.hostname;
-        const checkDomain = suspiciousDomainNames.some((domain) => hostname.includes(domain))
-
-        return checkDomain;
-    } catch (error) {
-        throw new Error(`Ocurrio un error al obtener el dominio ${error}`);
-    }
-}
 
 export function checkIfDomainIsTyposquatting (url: string): boolean {
     try {
@@ -110,20 +95,6 @@ export function checkIfSubdomainPartsAreTyposquatting (url: string): boolean {
      }
 }
 
-export function checkIfTLDIsRare (url: string): boolean {
-    try {
-        const urlObject = new URL(url);
-        const hostname = urlObject.hostname;
-        const parts = hostname.split('.');
-        // The last part of the URL is the TLD
-        const tld = parts[parts.length - 1];
-
-        return suspiciousTLD.includes(tld);
-    } catch (error) {
-        throw new Error(`Ocurrio un error al obtener el TLD ${error}`);
-    } 
-}
-
 function doesClosestSharesAtLeastHalfCharactersWithDomain (closest: string, domain: string): boolean {
     let counter = 0;
     for (let i = 0; i < closest.length; i++) {
@@ -135,14 +106,6 @@ function doesClosestSharesAtLeastHalfCharactersWithDomain (closest: string, doma
     if (counter > Math.round(closest.length / 2)) return true;
 
     return false;
-}
-
-export function isDomainAServiceToShortenURL (url:string) {
-    const urlObject = new URL(url);
-    const hostname = urlObject.hostname;
-    const isHostnameShortenURL = shortenURLDomains.some((domain) => hostname.includes(domain));
-
-    return isHostnameShortenURL;
 }
 
 /* 

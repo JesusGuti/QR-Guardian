@@ -6,21 +6,21 @@ import {
     useEffect,
     useContext
 } from "react";
+import {
+    checkIfDomainIsSuspicious,
+    checkIfTLDIsRare
+} from "@/services/URLServices/checkDomainAndSubdomain";
 import { 
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL,
-} from "@/services/checkUrl";
-import {
-    checkIfDomainIsSuspicious,
-    checkIfTLDIsRare
-} from "@/services/checkDomainAndSubdomain";
+} from "@/services/URLServices/checkUrl";
 import {
     isUrlSafe,
     getUrlReportAnalysis,
     scanUrl,
     isUrlSuspicious
-} from "@/services/getUrlReport";
+} from "@/services/VirusTotalService/getUrlReport";
 
 export function useSearchParamsFromImage () {
     const { uri, qrdata } = useLocalSearchParams();
