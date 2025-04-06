@@ -8,7 +8,7 @@ import {
 import { 
     checkIfTLDIsRare,
     checkIfDomainIsSuspicious 
-} from "@/services/checkDomainAndSubdomain";
+} from "@/services/URLServices/checkDomainAndSubdomain";
 
 export function useShowSuspiciousDetails() {
     const { url, results } = useLocalSearchParams();
