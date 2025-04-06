@@ -1,8 +1,8 @@
 import { ClosestWord } from "@/interfaces/ClosestWord";
-import { domainNames } from "@/constants/domainNames";
-import { suspiciousDomainNames } from "@/constants/suspiciousDomainNames";
-import { suspiciousTLD } from "@/constants/suspiciousTLD";
-import { shortenURLDomains } from "@/constants/shortenURLDomains";
+import { domainNames } from "@/constants/URLConstants/domainNames";
+import { suspiciousDomainNames } from "@/constants/URLConstants/suspiciousDomainNames";
+import { suspiciousTLD } from "@/constants/URLConstants/suspiciousTLD";
+import { shortenURLDomains } from "@/constants/URLConstants/shortenURLDomains";
 import {
     distance,
     closest

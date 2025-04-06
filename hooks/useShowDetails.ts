@@ -7,7 +7,7 @@ import {
     MALWARE_VALUE,
     PHISHING_VALUE,
     SUSPICIOUS_VALUE
-} from "@/constants/resultMessage";
+} from "@/constants/ScanConstants/resultMessage";
 
 export function useShowDetails () {
     const [showDetails, setShowDetails] = useState(false);

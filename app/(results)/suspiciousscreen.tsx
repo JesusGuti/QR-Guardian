@@ -3,7 +3,7 @@ import Description from "@/components/ResultsComponents/Description";
 import IsSuspiciousCheckbox from "@/components/ResultsComponents/IsSuspiciousCheckbox";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 import suspiciousIcon from "@/assets/images/suspicious-icon.png"
-import { suspiciousGradient } from "@/constants/gradientSchema";
+import { suspiciousGradient } from "@/constants/ScanConstants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import { useShowSuspiciousDetails } from "@/hooks/useShowSuspiciousDetails";
 import { 

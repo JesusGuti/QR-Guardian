@@ -1,5 +1,5 @@
 import { NavigationContext } from "@/contexts/NavigationProvider";
-import { scanAlertSchema } from "@/constants/scanAlertSchema";
+import { scanAlertSchema } from "@/constants/ScanConstants/scanAlertSchema";
 import { useLocalSearchParams } from "expo-router";
 import { 
     useState,

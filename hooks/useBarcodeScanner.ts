@@ -1,6 +1,6 @@
 import throttle from "just-throttle";
 import { BarcodeScanningResult } from "expo-camera";
-import { scanAlertSchema } from "@/constants/scanAlertSchema";
+import { scanAlertSchema } from "@/constants/ScanConstants/scanAlertSchema";
 import { NavigationContext } from "@/contexts/NavigationProvider";
 import { 
     useCallback, 
