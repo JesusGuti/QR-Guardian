@@ -9,7 +9,7 @@ import { getImageByRoute } from "@/services/getImageByRoute";
 import { 
     redGradient,
     blueGradient
- } from "@/constants/gradientSchema";
+ } from "@/constants/ScanConstants/gradientSchema";
 
 type Props = PropsWithChildren<{
     scanStatus: string

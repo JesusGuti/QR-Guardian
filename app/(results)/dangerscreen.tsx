@@ -3,7 +3,7 @@ import AlertText from "@/components/ResultsComponents/AlertText";
 import Description from "@/components/ResultsComponents/Description";
 import DetailsScreen from "../(details)/detailsscreen";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
-import { dangerGradient } from "@/constants/gradientSchema";
+import { dangerGradient } from "@/constants/ScanConstants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import { useShowDetails } from "@/hooks/useShowDetails";
 import { StyleSheet } from "react-native"

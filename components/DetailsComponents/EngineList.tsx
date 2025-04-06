@@ -13,7 +13,7 @@ import {
     PHISHING_VALUE,
     SUSPICIOUS_VALUE,
     messages
-} from "@/constants/resultMessage"
+} from "@/constants/ScanConstants/resultMessage"
 
 import phishingIcon from "@/assets/images/fish-hook.png";
 import maliciousIcon from "@/assets/images/exclamation-circle.png";
