@@ -2,7 +2,7 @@ import {
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
     checkIfIsValidURL,
-} from "@/services/checkUrl";
+} from "@/services/URLServices/checkUrl";
 
 test("Given an URL that starts with https:// it should be a valid URL", () => {
     expect(checkIfIsValidURL("https://www.youtube.com/watch?v=4XTkiudd-_E")).toBe(true);

@@ -1,7 +1,6 @@
 import { VirusTotalAnalysis } from "@/interfaces/VirusTotalAnalysis";
 
-const apiKey = process.env.EXPO_PUBLIC_VIRUSTOTAL_API_KEY;
-
+const apiKey = process.env.EXPO_PUBLIC_VIRUSTOTAL_API_KEY || process.env.TESTING_VIRUSTOTAL_API_KEY;
 /*
     This function sends the obtained URL from scan to VirusTotal API. Using the POST method it will check if the URL exists and return and ID
 */
