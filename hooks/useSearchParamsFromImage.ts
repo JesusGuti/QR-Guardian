@@ -1,15 +1,16 @@
+import { checkAllHeuristics } from "@/services/checkAllHeuristics";
 import { NavigationContext } from "@/contexts/NavigationProvider";
 import { scanAlertSchema } from "@/constants/ScanConstants/scanAlertSchema";
-import { useLocalSearchParams } from "expo-router";
+import { 
+    ExternalPathString, 
+    UnknownInputParams,
+    useLocalSearchParams 
+} from "expo-router";
 import { 
     useState,
     useEffect,
     useContext
 } from "react";
-import {
-    checkIfDomainIsSuspicious,
-    checkIfTLDIsRare
-} from "@/services/URLServices/checkDomainAndSubdomain";
 import { 
     areOriginalUrlAndHoppedSimilar,
     checkIfThereAreHops,
@@ -19,7 +20,6 @@ import {
     isUrlSafe,
     getUrlReportAnalysis,
     scanUrl,
-    isUrlSuspicious
 } from "@/services/VirusTotalService/getUrlReport";
 
 export function useSearchParamsFromImage () {
@@ -34,6 +34,11 @@ export function useSearchParamsFromImage () {
     }
 
     const { router } = navigationContext;
+
+    const redirectToScreen = (path: string, sentParams: UnknownInputParams) => {
+        const createdPath = path as ExternalPathString;
+        router.replace({ pathname: createdPath, params: sentParams });
+    }
 
     useEffect(() => {
         const scannedQR = JSON.parse(qrdata.toString());
@@ -63,16 +68,23 @@ export function useSearchParamsFromImage () {
                 const results = await getUrlReportAnalysis(urlID);
     
                 if (!isUrlSafe(results)) {
-                    router.replace({ pathname: "/(results)/dangerscreen", params: { url: data, results: JSON.stringify(results) } });
+                    redirectToScreen("/(results)/dangerscreen", { url: data, results: JSON.stringify(results) });
                     return;
                 } 
     
-                if (checkIfTLDIsRare(data) || checkIfDomainIsSuspicious(data) || isUrlSuspicious(results)) {
-                    router.replace({ pathname: "/(results)/suspiciousscreen", params: { url: data, results: JSON.stringify(results) } });
+                // Checking all heuristics to determine if the URL is suspicious
+                const resultCheckHeuristics = checkAllHeuristics(results, data);
+            
+                if (resultCheckHeuristics.includes(true)) {
+                    redirectToScreen("/(results)/suspiciousscreen", { 
+                        url: data, 
+                        results: JSON.stringify(results),
+                        heuristics: JSON.stringify(resultCheckHeuristics) 
+                    });
                     return;
                 }
     
-                router.replace({ pathname: "/(results)/safescreen", params: { url: results.last_final_url } });
+                redirectToScreen("/(results)/safescreen", { url: results.last_final_url });
             } catch (error) {
                 setScanData({
                     ...scanAlertSchema.failed
