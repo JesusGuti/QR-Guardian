@@ -78,7 +78,6 @@ export function useSearchParamsFromImage () {
                 if (resultCheckHeuristics.includes(true)) {
                     redirectToScreen("/(results)/suspiciousscreen", { 
                         url: data, 
-                        results: JSON.stringify(results),
                         heuristics: JSON.stringify(resultCheckHeuristics) 
                     });
                     return;
