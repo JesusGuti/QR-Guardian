@@ -9,16 +9,23 @@ import {
 type Props = PropsWithChildren<{
     text: string;
     checked: boolean;
+    checkboxColor: string;
 }>
 
-export default function IsSuspiciousCheckbox ({ text, checked }: Props) {
+const ELEVATION_VALUE = 7;
+const ELEVATION_VALUE_UNCHECKED = 0;
+
+export default function IsSomethingCheckbox ({ text, checked, checkboxColor }: Props) {
     return (
         <View style={styles.container}>
             <Text style={styles.description}>{text}</Text>
             <Checkbox 
-                style={styles.checkbox}
                 value={checked}
-                color={'#F28F51'}
+                color={checkboxColor}
+                style={[
+                    styles.checkbox,
+                    checked ? styles.checkBoxSelected : styles.checkBoxUnselected
+                ]}
             />
         </View>
     )
@@ -26,7 +33,7 @@ export default function IsSuspiciousCheckbox ({ text, checked }: Props) {
 
 const styles = StyleSheet.create({
     container: {
-        width: 300,
+        width: 320,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -44,5 +51,15 @@ const styles = StyleSheet.create({
         width: 25,
         height: 25,
         borderRadius: 5,
+    },
+
+    checkBoxSelected: {
+        elevation: ELEVATION_VALUE,
+        shadowColor: '#000'   
+    },
+
+    checkBoxUnselected: {
+        elevation: ELEVATION_VALUE_UNCHECKED,
+        shadowColor: '#000'   
     }
 });

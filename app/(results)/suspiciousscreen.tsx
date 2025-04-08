@@ -1,6 +1,6 @@
 import AlertText from "@/components/ResultsComponents/AlertText";
 import Description from "@/components/ResultsComponents/Description";
-import IsSuspiciousCheckbox from "@/components/ResultsComponents/IsSuspiciousCheckbox";
+import IsSomethingCheckbox from "@/components/ResultsComponents/IsSomethingCheckbox";
 import ResultBackground from "@/components/ResultsComponents/ResultBackground";
 import suspiciousIcon from "@/assets/images/suspicious-icon.png"
 import { suspiciousGradient } from "@/constants/ScanConstants/gradientSchema";
@@ -13,13 +13,17 @@ import {
     View 
 } from "react-native";
 
+const checkboxColor = suspiciousGradient.colors[0];
+
 export default function SuspiciousScreen () {   
     const { 
         url, 
         handlePress,
         isDomainChecked,
         isTLDChecked,
-        isScannedChecked
+        isScannedChecked,
+        isDomainTyposquattingChecked,
+        isSubdomainTyposquattingChecked
     } = useShowSuspiciousDetails();
 
     const highlightSuspiciousPart = () => {
@@ -28,11 +32,13 @@ export default function SuspiciousScreen () {
             const { hostname, protocol, pathname } = urlObject;
             const splittedDomain = hostname.split(".");
             const TLD = splittedDomain.pop();
+            const domain = splittedDomain.pop();
 
             return (
                 <Text style={styles.url}>
                     {protocol}//
-                    <Text style={isDomainChecked ? styles.suspiciousPart : styles.url}>{splittedDomain.join(".")}.</Text>
+                    <Text style={(isDomainChecked || isSubdomainTyposquattingChecked) ? styles.suspiciousPart : styles.url}>{splittedDomain.join(".")}.</Text>
+                    <Text style={(isDomainChecked || isDomainTyposquattingChecked) ? styles.suspiciousPart : styles.url}>{domain}.</Text>
                     <Text style={isTLDChecked ? styles.suspiciousPart : styles.url}>{TLD}</Text>
                     {pathname}
                 </Text>
@@ -60,9 +66,10 @@ export default function SuspiciousScreen () {
                 <Text style={styles.url}>{highlightSuspiciousPart()}</Text>
             </View>
 
-            <IsSuspiciousCheckbox text={"¿TLD sospechoso?"} checked={isTLDChecked} />
-            <IsSuspiciousCheckbox text={"¿Dominio sospechoso?"} checked={isDomainChecked} />
-            <IsSuspiciousCheckbox text={"¿Detectado por algún motor?"} checked={isScannedChecked} />
+            <IsSomethingCheckbox text={"¿TLD sospechoso?"} checked={isTLDChecked} checkboxColor={checkboxColor} />
+            <IsSomethingCheckbox text={"¿Dominio sospechoso?"} checked={isDomainChecked} checkboxColor={checkboxColor} />
+            <IsSomethingCheckbox text={"¿Es un caso de typosquatting?"} checked={isDomainTyposquattingChecked || isSubdomainTyposquattingChecked} checkboxColor={checkboxColor} />
+            <IsSomethingCheckbox text={"¿Detectado por algún motor?"} checked={isScannedChecked} checkboxColor={checkboxColor} />
             <ResultButton 
                 handlePress={handlePress}
                 buttonText="Acceder a enlace"
@@ -77,9 +84,8 @@ const styles = StyleSheet.create({
     suspiciousIcon: {
         width: 192, 
         height: 192,
-        marginTop: 50,
-        marginBottom: 20
-
+        marginTop: 20,
+        marginBottom: 10
     },
 
     alert: {
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        marginTop: 30
+        marginTop: 25
     },
 
     buttonText: {
