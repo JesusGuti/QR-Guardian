@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 10,
         borderRadius: 10,
-        marginLeft: 50
+        marginLeft: 35,
+        elevation: 10
     }, 
     
     boxCountText: {

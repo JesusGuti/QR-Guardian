@@ -1,5 +1,6 @@
 import EngineCounter from "@/components/DetailsComponents/EngineCounter";
 import EngineList from "@/components/DetailsComponents/EngineList";
+import IsSomethingCheckbox from "@/components/ResultsComponents/IsSomethingCheckbox";
 import UrlDetail from "@/components/DetailsComponents/UrlDetail";
 import { FilteredAnalysisResult } from "@/interfaces/FilteredAnalysisResult";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
@@ -51,6 +52,13 @@ export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalSca
                         url={finalUrl}
                     />
             }
+
+            <IsSomethingCheckbox 
+                text={"¿Es un caso de typosquatting?"}
+                checked={true}
+                checkboxColor={"#EE6565"}
+                containerWidth={340}
+            />
 
             <EngineCounter 
                 maliciousScans={maliciousScans}
