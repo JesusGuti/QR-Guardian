@@ -16,7 +16,9 @@ export default function DangerScreen () {
         finalUrl,
         totalScans,
         maliciousScans,
-        enginesList
+        enginesList,
+        checkDomainTyposquatting,
+        checkSubdomainTyposquatting
     } = useShowDetails()    
 
     return (
@@ -33,6 +35,8 @@ export default function DangerScreen () {
                         maliciousScans={maliciousScans}
                         totalScans={totalScans}
                         enginesList={enginesList}
+                        checkDomainTyposquatting={checkDomainTyposquatting}
+                        checkSubdomainTyposquatting={checkSubdomainTyposquatting}
                     />
                 :   
                     <>

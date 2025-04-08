@@ -14,6 +14,7 @@ import {
 } from "react-native";
 
 const checkboxColor = suspiciousGradient.colors[0];
+const containerWidth = 320;
 
 export default function SuspiciousScreen () {   
     const { 
@@ -37,7 +38,7 @@ export default function SuspiciousScreen () {
             return (
                 <Text style={styles.url}>
                     {protocol}//
-                    <Text style={(isDomainChecked || isSubdomainTyposquattingChecked) ? styles.suspiciousPart : styles.url}>{splittedDomain.join(".")}.</Text>
+                    <Text style={(isDomainChecked || isSubdomainTyposquattingChecked) ? styles.suspiciousPart : styles.url}>{splittedDomain.length > 0 ?  `${splittedDomain.join(".")}.` : ""}</Text>
                     <Text style={(isDomainChecked || isDomainTyposquattingChecked) ? styles.suspiciousPart : styles.url}>{domain}.</Text>
                     <Text style={isTLDChecked ? styles.suspiciousPart : styles.url}>{TLD}</Text>
                     {pathname}
@@ -47,8 +48,6 @@ export default function SuspiciousScreen () {
             throw new Error(`Error al resaltar la parte sospechosa de la URL ${error}`);
         }
     };
-
-    highlightSuspiciousPart()
 
     return (
         <ResultBackground
@@ -66,10 +65,29 @@ export default function SuspiciousScreen () {
                 <Text style={styles.url}>{highlightSuspiciousPart()}</Text>
             </View>
 
-            <IsSomethingCheckbox text={"¿TLD sospechoso?"} checked={isTLDChecked} checkboxColor={checkboxColor} />
-            <IsSomethingCheckbox text={"¿Dominio sospechoso?"} checked={isDomainChecked} checkboxColor={checkboxColor} />
-            <IsSomethingCheckbox text={"¿Es un caso de typosquatting?"} checked={isDomainTyposquattingChecked || isSubdomainTyposquattingChecked} checkboxColor={checkboxColor} />
-            <IsSomethingCheckbox text={"¿Detectado por algún motor?"} checked={isScannedChecked} checkboxColor={checkboxColor} />
+            <IsSomethingCheckbox 
+                text={"¿TLD sospechoso?"} 
+                checked={isTLDChecked} 
+                checkboxColor={checkboxColor} 
+                containerWidth={containerWidth}
+            />
+            <IsSomethingCheckbox 
+                text={"¿Dominio sospechoso?"} 
+                checked={isDomainChecked} 
+                checkboxColor={checkboxColor} 
+                containerWidth={containerWidth}
+            />
+            <IsSomethingCheckbox 
+                text={"¿Es un caso de typosquatting?"} 
+                checked={isDomainTyposquattingChecked || isSubdomainTyposquattingChecked} checkboxColor={checkboxColor} 
+                containerWidth={containerWidth}
+            />
+            <IsSomethingCheckbox 
+                text={"¿Detectado por algún motor?"} 
+                checked={isScannedChecked} 
+                checkboxColor={checkboxColor} 
+                containerWidth={containerWidth}
+            />
             <ResultButton 
                 handlePress={handlePress}
                 buttonText="Acceder a enlace"
@@ -110,7 +128,7 @@ const styles = StyleSheet.create({
     },
 
     suspiciousPart: {
-        color: '#F28F51',
+        color: checkboxColor,
         fontSize: 18,
         fontWeight: '800'
     },

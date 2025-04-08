@@ -2,6 +2,7 @@ import EngineCounter from "@/components/DetailsComponents/EngineCounter";
 import EngineList from "@/components/DetailsComponents/EngineList";
 import IsSomethingCheckbox from "@/components/ResultsComponents/IsSomethingCheckbox";
 import UrlDetail from "@/components/DetailsComponents/UrlDetail";
+import { areOriginalUrlAndHoppedSimilar } from "@/services/URLServices/checkUrl";
 import { FilteredAnalysisResult } from "@/interfaces/FilteredAnalysisResult";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import { NavigationContext } from "@/contexts/NavigationProvider";
@@ -20,9 +21,11 @@ type Props = PropsWithChildren<{
     maliciousScans: number
     totalScans: number
     enginesList: FilteredAnalysisResult[] | null
+    checkDomainTyposquatting: boolean
+    checkSubdomainTyposquatting: boolean
 }>
 
-export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalScans, enginesList }: Props) {
+export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalScans, enginesList, checkDomainTyposquatting, checkSubdomainTyposquatting }: Props) {
     const navigationContext = useContext(NavigationContext);
     
     if (!navigationContext) {
@@ -39,24 +42,28 @@ export default function DetailsScreen ({ url, finalUrl, maliciousScans, totalSca
         <>
             <Text style={styles.title}>Detalles de la Amenaza</Text>
             <UrlDetail 
-                    description="URL escaneada"
-                    url={url}
-                />
+                description="URL escaneada"
+                url={url}
+                checkDomainTyposquatting={checkDomainTyposquatting}
+                checkSubdomainTyposquatting={checkSubdomainTyposquatting}
+            />
                 
             {
-                url === finalUrl ? 
+                areOriginalUrlAndHoppedSimilar(url, finalUrl) ? 
                     null
                 :
                     <UrlDetail 
                         description="URL acortada o redireccionada"
                         url={finalUrl}
+                        checkDomainTyposquatting={checkDomainTyposquatting}
+                        checkSubdomainTyposquatting={checkSubdomainTyposquatting}
                     />
             }
 
             <IsSomethingCheckbox 
                 text={"¿Es un caso de typosquatting?"}
-                checked={true}
-                checkboxColor={"#EE6565"}
+                checked={checkDomainTyposquatting || checkSubdomainTyposquatting}
+                checkboxColor={"#D45454"}
                 containerWidth={340}
             />
 
