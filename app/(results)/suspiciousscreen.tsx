@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     },
 
     suspiciousPart: {
-        color: checkboxColor,
+        color: '#F28F51',
         fontSize: 18,
         fontWeight: '800'
     },
