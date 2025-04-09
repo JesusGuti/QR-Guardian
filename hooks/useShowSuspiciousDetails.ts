@@ -4,12 +4,13 @@ import {
     useState,
     useEffect
 } from "react";
-
-const TLD_POSITION = 0;
-const DOMAIN_CHECKED_POSITION = 1;
-const TYPOSQUATTING_DOMAIN_POSITION = 2;
-const TYPOSQUATTING_SUBDOMAIN_POSITION= 3;
-const SCANNED_POSIITON = 4;
+import {
+    TLD_POSITION,
+    DOMAIN_CHECKED_POSITION, 
+    TYPOSQUATTING_DOMAIN_POSITION,
+    TYPOSQUATTING_SUBDOMAIN_POSITION,
+    SCANNED_POSIITON
+} from "@/constants/ScanConstants/heuristicsPositions";
 
 export function useShowSuspiciousDetails() {
     const { url, heuristics } = useLocalSearchParams();

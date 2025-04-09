@@ -10,14 +10,19 @@ type Props = PropsWithChildren<{
     text: string;
     checked: boolean;
     checkboxColor: string;
+    containerWidth: number;
 }>
 
-const ELEVATION_VALUE = 7;
+const ELEVATION_VALUE = 10;
 const ELEVATION_VALUE_UNCHECKED = 0;
 
-export default function IsSomethingCheckbox ({ text, checked, checkboxColor }: Props) {
+export default function IsSomethingCheckbox ({ text, checked, checkboxColor, containerWidth }: Props) {
     return (
-        <View style={styles.container}>
+        <View 
+            style={[
+                styles.container,
+                { width: containerWidth }
+            ]}>
             <Text style={styles.description}>{text}</Text>
             <Checkbox 
                 value={checked}
@@ -33,12 +38,12 @@ export default function IsSomethingCheckbox ({ text, checked, checkboxColor }: P
 
 const styles = StyleSheet.create({
     container: {
-        width: 320,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: 'center',
-        padding: 10
+        padding: 10,
+        marginLeft: 5
     },
 
     description: {

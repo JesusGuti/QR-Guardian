@@ -70,14 +70,17 @@ export function useBarcodeScanner () {
 
                 const urlID = await scanUrl(urlAfterCheckHops);
                 const results = await getUrlReportAnalysis(urlID);
-            
-                if (!isUrlSafe(results)) {
-                    redirectToScreen("/(results)/dangerscreen", { url: data, results: JSON.stringify(results) });
-                    return;
-                } 
-
                 // Checking all heuristics to determine if the URL is suspicious
                 const resultCheckHeuristics = checkAllHeuristics(results, data);
+                
+                if (!isUrlSafe(results)) {
+                    redirectToScreen("/(results)/dangerscreen", { 
+                        url: data, 
+                        results: JSON.stringify(results),
+                        heuristics: JSON.stringify(resultCheckHeuristics) 
+                    });
+                    return;
+                } 
 
                 if (resultCheckHeuristics.includes(true)) {
                     redirectToScreen("/(results)/suspiciousscreen", { 

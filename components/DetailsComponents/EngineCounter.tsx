@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        width: 300,
+        width: 330,
         justifyContent: 'space-between',
         padding: 5,
-        marginLeft: -20
+        marginLeft: 5
     },
 
     title: {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 10,
         borderRadius: 10,
-        marginLeft: 50
+        elevation: 10
     }, 
     
     boxCountText: {

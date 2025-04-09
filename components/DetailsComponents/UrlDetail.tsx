@@ -7,14 +7,39 @@ import {
 
 type Props = PropsWithChildren<{
     description: string,
-    url: string
+    url: string,
+    checkDomainTyposquatting: boolean,
+    checkSubdomainTyposquatting: boolean
 }>
 
-export default function UrlDetail ({ description, url }: Props) {
+export default function UrlDetail ({ description, url, checkDomainTyposquatting, checkSubdomainTyposquatting }: Props) {
+    const highlightSuspiciousPart = () => {
+        try {
+            const urlObject = new URL(url);
+            const { hostname, protocol, pathname } = urlObject;
+            const splittedDomain = hostname.split(".");
+            const TLD = splittedDomain.pop();
+            const domain = splittedDomain.pop();
+
+            return (
+                <Text style={styles.url} numberOfLines={3}>
+                    {protocol}//
+                    <Text style={(checkSubdomainTyposquatting) ? styles.suspiciousPart : styles.url}>{splittedDomain.length > 0 ?  `${splittedDomain.join(".")}.` : ""}</Text>
+                    <Text style={(checkDomainTyposquatting) ? styles.suspiciousPart : styles.url}>{domain}.</Text>
+                    {TLD}
+                    {pathname}
+                </Text>
+            );
+        } catch (error) {
+            throw new Error(`Error al resaltar la parte sospechosa de la URL ${error}`);
+        }
+    };
+    
+
     return (
         <View style={styles.detail}>
             <Text style={styles.description}>{description}</Text>
-            <Text style={styles.url} numberOfLines={3}>{url}</Text>
+            {highlightSuspiciousPart()}
         </View>
     );
 }
@@ -40,5 +65,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textDecorationLine: 'underline',
         fontWeight: 400
+    },
+
+    suspiciousPart: {
+        color: '#D45454',
+        fontSize: 18,
+        fontWeight: '700'
     }
 });
