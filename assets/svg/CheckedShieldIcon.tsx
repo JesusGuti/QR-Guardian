@@ -18,6 +18,6 @@ export default function CheckedShieldIcon () {
 
 const styles = StyleSheet.create({
     shield: {
-        marginTop: 200
+        marginTop: 150
     }
 })

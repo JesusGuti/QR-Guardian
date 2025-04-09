@@ -5,7 +5,8 @@ import { safeGradient } from "@/constants/ScanConstants/gradientSchema";
 import { ResultButton } from "@/components/ResultsComponents/ResultButton";
 import { useLocalSearchParams } from "expo-router";
 import { 
-    StyleSheet, 
+    StyleSheet,
+    Text, 
     Linking 
 } from "react-native";
 
@@ -24,6 +25,7 @@ export default function SafeScreen () {
         >
             <CheckedShieldIcon />
             <AlertText text={"Código QR Seguro"}/>
+            <Text style={styles.url}>{url}</Text>
             <ResultButton 
                 handlePress={handlePress}
                 buttonText="Acceder a enlace"
@@ -36,10 +38,21 @@ export default function SafeScreen () {
 
 const styles = StyleSheet.create({
     button: {
-        marginTop: 50
+        marginTop: 30,
+        elevation: 5
     },
 
     buttonText: {
         color: 'rgba(102, 187, 106, 1)',
-    }
+    },
+
+    url: {
+        color: '#fff',
+        fontSize: 18,
+        marginTop: 15,
+        width: 350,
+        fontWeight: '600',
+        textDecorationLine: 'underline',
+        textAlign: 'center'
+    },
 });

@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
         width: 192, 
         height: 192,
         marginTop: 20,
-        marginBottom: 10
+        marginBottom: 10,
+        elevation: 5
     },
 
     alert: {
@@ -125,6 +126,8 @@ const styles = StyleSheet.create({
     url: {
         color: '#fff',
         fontSize: 18,
+        fontWeight: '600',
+        textDecorationLine: 'underline'
     },
 
     suspiciousPart: {

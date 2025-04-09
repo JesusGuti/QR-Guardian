@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 15,
-    alignItems: 'center'
+    alignItems: 'center',
+    elevation: 10
   },
 
   buttonText: {
