@@ -63,6 +63,7 @@ export const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
+        display: 'flex',
         justifyContent: 'center',
         alignContent: 'center',
         position: 'relative',
@@ -85,12 +86,15 @@ export const styles = StyleSheet.create({
 
     url: {
         position: 'absolute',
-        top: '15%',
-        left: '15%',
-        width: 300,
+        top: '14.5%',
+        left: 30,
+        width: 350,
         color: '#fff',
         textDecorationLine: 'underline',
+        textAlign: 'center',
         fontSize: 20,
-        zIndex: 2
+        zIndex: 2,
+        marginLeft: 'auto',
+        marginRight: 'auto'
     }
 });
