@@ -17,7 +17,6 @@ export const suspiciousTLD: string[] = [
     "work",
     "shop",
     "cloud",
-    "app",
     "blog",
     "click",
     "link",

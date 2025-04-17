@@ -51,4 +51,6 @@ export const shortenURLDomains = [
     'lnk.to',
     'lnk.bio',
     'plink.to',
+    'tr.ee',
+    'o2o.to'
 ];
